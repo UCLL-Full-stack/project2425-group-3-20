@@ -3,3 +3,19 @@ Title: Bob the encounter builder
 Description: met Bob de encounter builder willen we er voor zorgen dat gamemasters makkelijk zelf custom monsters kunnen maken en deze delen met hun peers.
 Ook willen we er voor zorgen dat de game masters makkelijk een random encountertable kunnen maken met hun homebrew monsters
 
+As a gamemaster
+I'm able to create homebrew monsters
+So that I can see the monsters I created
+
+As a user
+I'm able to see all monsters
+So that I can get inspiration form other people's monsters
+
+As a gamemaster 
+I'm able to create encountertable
+So that I can see what the random encounter is
+
+As a user 
+I'm able to create an account
+So that I can acces the other pages
+
