@@ -7,15 +7,25 @@ As a gamemaster
 I'm able to create homebrew monsters
 So that I can see the monsters I created
 
+Acceptance criteria:
+a monster should be saved in the database and be displayed in the monster list
+
 As a user
 I'm able to see all monsters
 So that I can get inspiration form other people's monsters
 
-As a gamemaster 
-I'm able to create encountertable
-So that I can see what the random encounter is
+Acceptance criteria:
+as a logged in user of the page i am able to see the monster list page and search for monsters
 
-As a user 
-I'm able to create an account
-So that I can acces the other pages
+As a gamemaster 
+I'm able to create an encountertable
+So that I can see what the random encounter is that i rolled
+
+Acceptance criteria: as a gamemaster when i create the encountertable i should see it
+
+As a gamemaster 
+I'm able to create an action to monster
+So that I can see them in the monster descreption
+
+Acceptance criteria: when a gamemaster creates an action to the monster it should be displayed in the monster description
 
