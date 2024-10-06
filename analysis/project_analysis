@@ -8,24 +8,26 @@ I'm able to create homebrew monsters
 So that I can see the monsters I created
 
 Acceptance criteria:
-a monster should be saved in the database and be displayed in the monster list
+A monster should be saved in the database and be displayed in the monster list
 
 As a user
 I'm able to see all monsters
 So that I can get inspiration form other people's monsters
 
 Acceptance criteria:
-as a logged in user of the page i am able to see the monster list page and search for monsters
+As a logged in user of the page I am able to see the monster list page and search for monsters
 
 As a gamemaster 
 I'm able to update an encountertable
 So that I can change the encountertable if I made a mistake
 
-Acceptance criteria: as a gamemaster when i update the encountertable i should see it with the updated values
+Acceptance criteria: 
+As a gamemaster when I update the encountertable I should see it with the updated values
 
 As a gamemaster 
-I'm able to delete an action to monster
+I'm able to delete an action from a monster
 So that I can delete a useless action form the monster
 
-Acceptance criteria: when a gamemaster deletes an action to the monster it shouldn't be displayed in the monster description anymore
+Acceptance criteria: 
+When a gamemaster deletes an action to the monster it shouldn't be displayed in the monster description anymore
 
