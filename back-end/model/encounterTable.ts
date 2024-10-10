@@ -1,3 +1,5 @@
+import { Monster } from "./monster";
+
 export class EncounterTable {
     private id?: number;
     private name: string;
