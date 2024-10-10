@@ -1,3 +1,5 @@
 type Role = 'gameMaster' | 'admin' | 'guest';
 
-export { Role };
+type ActionType = 'attack' | 'movement' | 'spell' | 'legendary' | 'special';
+
+export { Role, ActionType };
