@@ -221,6 +221,10 @@ export class Monster {
         setMovement(movement: number) {
             this.movement = movement;
         }
+        removeAction(actionId: number): void {
+            if (!this.actions) return;
+            this.actions = this.actions.filter(action => action.getId() !== actionId);
+        }
     
         /* getOwner(): User {
             return this.owner;
