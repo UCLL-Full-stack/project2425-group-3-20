@@ -66,9 +66,9 @@ actionRouter.get('/', async (req: Request, res: Response, next: NextFunction) =>
 actionRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
     try {
         const action = await actionService.getActionById(Number(req.params.id));
-        res.json(action);
-    } catch (err) {
-        next(err);
+        res.status(200).json(action);
+    } catch (error) {
+        return res.status(404).json({ message: (error as Error).message });
     }
 });
 
