@@ -1,4 +1,17 @@
-
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Action:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           description: The action ID
+ *         name:
+ *           type: string
+ *           description: The action name
+ */
 import express, { NextFunction, Request, Response } from 'express';
 import actionService from '../service/action.service';
 
