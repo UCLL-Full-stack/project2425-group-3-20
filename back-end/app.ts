@@ -10,6 +10,19 @@ const app = express();
 dotenv.config();
 const port = process.env.APP_PORT || 3000;
 
+const swaggerOpts = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'Courses API',
+            version: '1.0.0',
+        },
+    },
+    apis: ['./controller/*.routes.ts'],
+};
+const swaggerSpec = swaggerJSDoc(swaggerOpts);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 app.use(cors());
 app.use(bodyParser.json());
 
