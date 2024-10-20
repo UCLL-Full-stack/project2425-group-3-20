@@ -17,4 +17,26 @@ model Action{
     type        ActionType
     name        String
     description String
+    monsters    Monster []
+}
+model Monster{
+    id          Int        @id @default(autoincrement())
+    name        String
+    str         Int
+    dex         Int
+    con         Int
+    int         Int
+    wis         Int
+    cha         Int
+    ac          Int
+    hp          Int
+    immunities  String[]
+    languages   String[]
+    cr          String
+    type        String
+    movement    Int
+    //ownerId     Int
+    //owner       User       @relation(fields: [ownerId], references: [id])
+    actions     Action[]   
+
 }
