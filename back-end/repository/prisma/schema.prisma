@@ -5,3 +5,16 @@ datasource db{
     provider = "postgresql"
     url = env("DATABASE_URL")
 }
+enum ActionType{
+    attack
+    movement
+    spell
+    legendary
+    special
+}
+model Action{
+    id          Int     @id @default(autoincrement())
+    type        ActionType
+    name        String
+    description String
+}
