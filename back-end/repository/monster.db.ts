@@ -1,14 +1,39 @@
 
 import { Monster } from '../model/monster';
 import database from '../util/database';
-const getAllMonster  = async (): Promise<Monster[]> => {
-    try {
-        const monsterPrisma = await database.monster.findMany()
-        return monsterPrisma.map((monsterPrisma) => Monster.from(monsterPrisma))
-    } catch (error) {
-        throw new Error('Database error. See server log for details.')
-    }
+
+const monsters: Monster[] = [];
+const getAllMonsters = async (): Promise<Monster[]> => {
+    return monsters;
 };
+
+const getMonsterById = async (monsterId: number): Promise<Monster> => {
+    const monster = monsters.find((monster) => monster.getId() === monsterId);
+    if (!monster) {
+        throw new Error('Monster not found');
+    }
+    return monster;
+}
+const deleteMonster = async (monsterId: number ): Promise<Monster> =>{
+    const monster = getMonsterById(monsterId)
+    const index = monsters.findIndex((monster) => monster.getId() === monsterId);
+    
+    if (index !== -1) {
+        monsters.splice(index, 1);
+    }
+
+    return monster;
+}
+
+export default { getAllMonsters, getMonsterById,deleteMonster };
+// const getAllMonster  = async (): Promise<Monster[]> => {
+//     try {
+//         const monsterPrisma = await database.monster.findMany()
+//         return monsterPrisma.map((monsterPrisma) => Monster.from(monsterPrisma))
+//     } catch (error) {
+//         throw new Error('Database error. See server log for details.')
+//     }
+// };
 // const deleteMonsterAction = async (monsterId: number, actionId: number): Promise<Monster> => {
 //     try {
 //         // Fetch the monster from the database
