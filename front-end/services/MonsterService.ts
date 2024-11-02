@@ -1,7 +1,7 @@
 import { get } from "http";
 
 const getAllMonsters = async () => {
-    return fetch(process.env.NEXT_PUBLIC_API_URL+"/lecturers",{
+    return fetch(process.env.NEXT_PUBLIC_API_URL+"/monsters",{
       method:"GET",
       headers:{
         "Content-Type" : "application/json"
