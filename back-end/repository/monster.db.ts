@@ -29,7 +29,7 @@ const actions: Action[] = [
             int: 10,
             wis: 8,
             cha: 8,
-            actions: [actions[0], actions[1]], // Now `actions` is guaranteed to be loaded
+            actions: [actions[0], actions[1]], 
             ac: 15,
             hp: 7,
             immunities: [],
