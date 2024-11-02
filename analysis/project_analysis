@@ -25,9 +25,9 @@ Acceptance criteria:
 As a gamemaster when I update the encountertable I should see it with the updated values
 
 As a gamemaster 
-I'm able to delete an action from a monster
-So that I can delete a useless action form the monster
+I'm able to delete all actions from a monster
+So that I can select the monster actions again
 
 Acceptance criteria: 
-When a gamemaster deletes an action to the monster it shouldn't be displayed in the monster description anymore
+When a gamemaster deletes all actions to the monster it shouldn't be displaying any actions in the monster description anymore
 
