@@ -58,45 +58,45 @@ export class Monster {
         //this.owner = monster.owner;
     }
     
-    static from(monsterPrisma: {
-        id?: number;
-        name: string;
-        str: number;
-        dex: number;
-        con: number;
-        int: number;
-        wis: number;
-        cha: number;
-        actions?: Action[]; // Actions might be missing in database response
-        ac: number;
-        hp: number;
-        immunities: string[];
-        languages: string[];
-        cr: string;
-        type: string;
-        movement: number;
-        //owner:User;
-    }): Monster {
-        return new Monster({
-            id: monsterPrisma.id,
-            name: monsterPrisma.name,
-            str: monsterPrisma.str,
-            dex: monsterPrisma.dex,
-            con: monsterPrisma.con,
-            int: monsterPrisma.int,
-            wis: monsterPrisma.wis,
-            cha: monsterPrisma.cha,
-            actions: monsterPrisma.actions ?? [], // Default to empty array if actions are missing
-            ac: monsterPrisma.ac,
-            hp: monsterPrisma.hp,
-            immunities: monsterPrisma.immunities,
-            languages: monsterPrisma.languages,
-            cr: monsterPrisma.cr,
-            type: monsterPrisma.type,
-            movement: monsterPrisma.movement,
-            //owner: monsterPrisma.owner,
-        });
-    }
+    // static from(monsterPrisma: {
+    //     id?: number;
+    //     name: string;
+    //     str: number;
+    //     dex: number;
+    //     con: number;
+    //     int: number;
+    //     wis: number;
+    //     cha: number;
+    //     actions?: Action[]; // Actions might be missing in database response
+    //     ac: number;
+    //     hp: number;
+    //     immunities: string[];
+    //     languages: string[];
+    //     cr: string;
+    //     type: string;
+    //     movement: number;
+    //     //owner:User;
+    // }): Monster {
+    //     return new Monster({
+    //         id: monsterPrisma.id,
+    //         name: monsterPrisma.name,
+    //         str: monsterPrisma.str,
+    //         dex: monsterPrisma.dex,
+    //         con: monsterPrisma.con,
+    //         int: monsterPrisma.int,
+    //         wis: monsterPrisma.wis,
+    //         cha: monsterPrisma.cha,
+    //         actions: monsterPrisma.actions ?? [], // Default to empty array if actions are missing
+    //         ac: monsterPrisma.ac,
+    //         hp: monsterPrisma.hp,
+    //         immunities: monsterPrisma.immunities,
+    //         languages: monsterPrisma.languages,
+    //         cr: monsterPrisma.cr,
+    //         type: monsterPrisma.type,
+    //         movement: monsterPrisma.movement,
+    //         //owner: monsterPrisma.owner,
+    //     });
+    // }
     
         // Getter for id
         getId(): number | undefined {

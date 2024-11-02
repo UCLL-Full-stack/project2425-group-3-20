@@ -6,7 +6,8 @@ export class Action {
     private description: string;
     private type: ActionType;
 
-    constructor(action: {name: string, description: string, type: ActionType}) {
+    constructor(action: { id?: number,name: string, description: string, type: ActionType}) {
+        this.id = action.id;
         this.name = action.name;
         this.description = action.description;
         this.type = action.type;

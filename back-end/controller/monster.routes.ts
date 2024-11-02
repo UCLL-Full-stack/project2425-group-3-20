@@ -92,7 +92,7 @@ monsterRouter.get('/', async (req: Request, res: Response, next: NextFunction) =
 /**
  * @swagger
  * /monster/{monsterId}/{actionId}:
- *   put:
+ *   delete:
  *     summary: Delete a monster action by monster ID and action ID, then return the associated monster
  *     parameters:
  *       - in: path
@@ -131,7 +131,7 @@ monsterRouter.get('/', async (req: Request, res: Response, next: NextFunction) =
  *                   type: string
  *                   example: "Monster or action with ID not found"
  */
-monsterRouter.put('/:monsterId/:actionId', async (req: Request, res: Response, next: NextFunction) => {
+monsterRouter.delete('/:monsterId/:actionId', async (req: Request, res: Response, next: NextFunction) => {
     try {
         const monsters = await monsterService.deleteMonsterAction(Number(req.params.monsterId),Number(req.params.actionId));
         res.json(monsters);
