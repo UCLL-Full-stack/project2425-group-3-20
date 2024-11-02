@@ -1,4 +1,5 @@
 
+import { Action } from '@prisma/client';
 import { Monster } from '../model/monster';
 import database from '../util/database';
 
@@ -18,14 +19,27 @@ const deleteMonster = async (monsterId: number ): Promise<Monster> =>{
     const monster = getMonsterById(monsterId)
     const index = monsters.findIndex((monster) => monster.getId() === monsterId);
     
-    if (index !== -1) {
-        monsters.splice(index, 1);
-    }
+    monsters.splice(index, 1);
 
     return monster;
 }
 
-export default { getAllMonsters, getMonsterById,deleteMonster };
+const deleteMonsterAction = async (monsterId: number, actionId: number): Promise<Monster> => {
+    const monster = await getMonsterById(monsterId)
+    const actions = monster.getActions() || [];
+    const index = actions.findIndex((action) => action.getId() === actionId);    
+    
+    if (index === -1) {
+        throw new Error(`Action with ID ${actionId} does not exist on monster with ID ${monsterId}`);
+    }
+    
+    actions.splice(index, 1);
+    monster.setActions(actions)
+    
+    return monster;
+}
+
+export default { getAllMonsters, getMonsterById,deleteMonster,deleteMonsterAction };
 // const getAllMonster  = async (): Promise<Monster[]> => {
 //     try {
 //         const monsterPrisma = await database.monster.findMany()
