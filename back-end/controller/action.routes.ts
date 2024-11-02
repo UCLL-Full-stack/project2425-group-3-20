@@ -61,7 +61,7 @@ actionRouter.get('/', async (req: Request, res: Response, next: NextFunction) =>
  *             schema:
  *               $ref: '#/components/schemas/Action'
  *       404:
- *         description: Action not found
+ *         description: Action with id ${id} not found
  */
 actionRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
     try {
