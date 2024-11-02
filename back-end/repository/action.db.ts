@@ -1,6 +1,19 @@
 import { Action } from "../model/action";
 
-const actions: Action[] = [];
+const actions: Action[] = [
+    new Action({
+        id: 0,
+        name:"shortbow attack",
+        description:"ranged attack 1d8 damage",
+        type:'attack',
+    }),
+    new Action({
+        id: 1,
+        name:"shortsword attack",
+        description:"melee attack 1d8 damage",
+        type:'attack',
+    }),
+];
 
 const getAllActions = async (): Promise<Action[]> => {
     return actions;
