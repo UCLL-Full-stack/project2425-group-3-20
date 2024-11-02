@@ -2,10 +2,22 @@ import { Monster } from '../model/monster';
 import database from '../util/database';
 import { Action } from '../model/action';
 import { ActionType } from '@prisma/client';
-import actions from './action.db';
 
-const loadMonsters = async (): Promise<Monster[]> => {
-    const allActions = await actions.getAllActions();
+
+const actions: Action[] = [
+    new Action({
+        id: 0,
+        name:"shortbow attack",
+        description:"ranged attack 1d8 damage",
+        type:'attack',
+    }),
+    new Action({
+        id: 1,
+        name:"shortsword attack",
+        description:"melee attack 1d8 damage",
+        type:'attack',
+    }),
+];
 
     const monsters: Monster[] = [
         new Monster({
@@ -17,7 +29,7 @@ const loadMonsters = async (): Promise<Monster[]> => {
             int: 10,
             wis: 8,
             cha: 8,
-            actions: [allActions[0], allActions[1]], // Now `actions` is guaranteed to be loaded
+            actions: [actions[0], actions[1]], // Now `actions` is guaranteed to be loaded
             ac: 15,
             hp: 7,
             immunities: [],
@@ -82,15 +94,15 @@ const loadMonsters = async (): Promise<Monster[]> => {
         })
 
     ];
-    return monsters;
-};
+
+
 const getAllMonsters = async (): Promise<Monster[]> => {
-    const monsters = await loadMonsters();
+
     return monsters;
 };
 
 const getMonsterById = async (monsterId: number): Promise<Monster> => {
-    const monsters = await loadMonsters();
+;
     const monster = monsters.find((monster) => monster.getId() === monsterId);
     if (!monster) {
         throw new Error('Monster not found');
@@ -98,7 +110,7 @@ const getMonsterById = async (monsterId: number): Promise<Monster> => {
     return monster;
 }
 const deleteMonster = async (monsterId: number ): Promise<Monster> =>{
-    const monsters = await loadMonsters();
+
     const monster = getMonsterById(monsterId)
     const index = monsters.findIndex((monster) => monster.getId() === monsterId);
     
@@ -107,22 +119,24 @@ const deleteMonster = async (monsterId: number ): Promise<Monster> =>{
     return monster;
 }
 
-const deleteMonsterAction = async (monsterId: number, actionId: number): Promise<Monster> => {
-    const monster = await getMonsterById(monsterId)
-    const actions = monster.getActions() || [];
-    const index = actions.findIndex((action) => action.getId() === actionId);    
-    
+const deleteMonsterActions = async (monsterId: number): Promise<Monster> => {
+
+    const monster = await getMonsterById(monsterId); 
+
+
+    const index = monsters.findIndex((m) => m.getId() === monsterId);
     if (index === -1) {
-        throw new Error(`Action with ID ${actionId} does not exist on monster with ID ${monsterId}`);
+        throw new Error('Monster not found');
     }
-    
-    actions.splice(index, 1);
-    monster.setActions(actions)
-    
-    return monster;
+
+
+    monster.setActions([]);
+    monsters[index] = monster;
+
+    return monster; 
 }
 
-export default { getAllMonsters, getMonsterById,deleteMonster,deleteMonsterAction };
+export default { getAllMonsters, getMonsterById,deleteMonster,deleteMonsterActions };
 // const getAllMonster  = async (): Promise<Monster[]> => {
 //     try {
 //         const monsterPrisma = await database.monster.findMany()

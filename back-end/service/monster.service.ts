@@ -20,14 +20,14 @@ const deleteMonster = async (monsterId:number): Promise<Monster| undefined> => {
     return monster;
     
 }
-const deleteMonsterAction = async (monsterId:number,actionId:number): Promise<Monster| undefined> => {
-    const monster  = await monsterDb.deleteMonsterAction(monsterId,actionId);
+const deleteMonsterActions = async (monsterId:number): Promise<Monster| undefined> => {
+    const monster  = await monsterDb.deleteMonsterActions(monsterId);
     if (!monster) {
-        throw new Error(`Monster with id ${monsterId} not found or Action with id ${actionId} is not found`);
+        throw new Error(`Monster with id ${monsterId} not found `);
     }
     return monster;
     
 }
 
 
-export default { getAllMonsters, getMonsterById,deleteMonster,deleteMonsterAction};
+export default { getAllMonsters, getMonsterById,deleteMonster,deleteMonsterActions};
