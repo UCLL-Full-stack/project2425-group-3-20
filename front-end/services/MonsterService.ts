@@ -9,9 +9,18 @@ const getAllMonsters = async () => {
     })
 };
 
+const deleteActions = async (id: number) => {
+    return fetch(process.env.NEXT_PUBLIC_API_URL+`/monsters/${id}`,{
+      method:"PUT",
+      headers:{
+        "Content-Type" : "application/json"
+      }
+  })
+};
 
 const MonsterService = {
     getAllMonsters,
+    deleteActions
 };
 export default MonsterService;
   

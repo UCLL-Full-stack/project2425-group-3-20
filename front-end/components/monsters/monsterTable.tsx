@@ -1,11 +1,22 @@
 import React from "react";
 import { Monster } from "@types";
+import { useRouter } from "next/router";
+import MonsterService from "@services/MonsterService";
 
 type Props = {
   monsters: Array<Monster>;
 };
 
 const monsterOverviewTable: React.FC<Props> = ({ monsters }: Props) => {
+    const router = useRouter();
+
+    const deleteActions = async (id: number) => {
+        const response = await MonsterService.deleteActions(id);
+        if (response.ok) {
+            router.reload();
+        }
+    };
+
   return (
     <>
       {monsters && (
@@ -27,6 +38,7 @@ const monsterOverviewTable: React.FC<Props> = ({ monsters }: Props) => {
               <th scope="col">Challenge Rating</th>
               <th scope="col">Type</th>
               <th scope="col">Movement</th>
+              <th scope="col">Delete Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -51,6 +63,14 @@ const monsterOverviewTable: React.FC<Props> = ({ monsters }: Props) => {
                 <td>{monster.cr}</td>
                 <td>{monster.type}</td>
                 <td>{monster.movement}</td>
+                <td>
+                  <button className="px-5 py-2 bg-red-700 text-black border-none rounded cursor-pointer transition-colors duration-300 hover:bg-red-300" onClick={((event) => {
+                    event.stopPropagation();
+                    if (monster.id !== undefined) {
+                      deleteActions(monster.id);
+                    }
+                  })}>Delete Actions</button>
+                </td>
               </tr>
             ))}
           </tbody>
