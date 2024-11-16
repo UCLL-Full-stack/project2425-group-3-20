@@ -42,4 +42,17 @@ export class Action {
     setType(type: ActionType): void {
         this.type = type;
     }
+    static from(actionPrisma: {
+         id?: number; 
+         name: string; 
+         description: string; 
+         type: ActionType 
+        }): Action {
+        return new Action({
+            id:actionPrisma.id,
+            name:actionPrisma.name,
+            description:actionPrisma.description,
+            type:actionPrisma.type
+        }); // Pass the plain object directly to the constructor
+    }
 }
