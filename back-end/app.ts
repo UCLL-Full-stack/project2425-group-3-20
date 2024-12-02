@@ -6,6 +6,7 @@ import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import actionRouter from './controller/action.routes';
 import monsterRouter from './controller/monster.routes';
+import { userRouter } from './controller/user.routes';
 
 const app = express();
 dotenv.config();
@@ -38,3 +39,5 @@ app.listen(port || 3000, () => {
 app.use('/actions', actionRouter);
 
 app.use('/monsters', monsterRouter);
+
+app.use('/users',userRouter)
