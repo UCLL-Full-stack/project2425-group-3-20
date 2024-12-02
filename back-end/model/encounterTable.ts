@@ -1,4 +1,5 @@
 import { Monster } from "./monster";
+import {EncounterTable as EncounterTablePrisma} from "@prisma/client";
 
 export class EncounterTable {
     private id?: number;
@@ -30,5 +31,17 @@ export class EncounterTable {
 
     setMonsters(monsters: Monster[]): void {
         this.monsters = monsters;
+    }
+
+    static from({
+        id,
+        name,
+        monsters
+    }: Partial<EncounterTablePrisma>): EncounterTable {
+        return new EncounterTable({
+            id: id || 0,
+            name: name!,
+            monsters: monsters!
+        });
     }
 }
