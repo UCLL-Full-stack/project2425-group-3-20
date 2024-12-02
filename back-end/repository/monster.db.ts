@@ -6,12 +6,12 @@ import { Monster as MonsterPrisma,
  } from '@prisma/client';
 
 
-// 
+ 
 const getAllMonsters  = async (): Promise<Monster[]> => {
     try {
         const monstersPrisma = await database.monster.findMany({
             include: {
-                actions: true, // Include the related "action" data
+                actions: true, 
             },
         });
         return monstersPrisma.map((monsterPrisma) => Monster.from(monsterPrisma))
@@ -19,7 +19,29 @@ const getAllMonsters  = async (): Promise<Monster[]> => {
         throw new Error('Database error. See server log for details.')
     }
 };
-const deleteMonsterActions = async (monsterId: number, actionId: number): Promise<Monster> => {
+const getMonsterById = async (id: number): Promise<Monster | null> => {
+    try {
+        const monsterPrisma = await database.monster.findUnique({
+            where: {
+                id: id,
+            },
+            include: {
+                actions: true, 
+            },
+        });
+
+        if (!monsterPrisma) {
+            throw new Error(`Monster with ID ${id} not found`);
+        }
+
+        return Monster.from(monsterPrisma);
+    } catch (error) {
+        throw new Error('Database error. See server log for details.');
+    }
+};
+
+
+const deleteMonsterActions = async (monsterId: number): Promise<Monster> => {
     try {
         // Fetch the monster from the database
         const monsterPrisma = await database.monster.findUnique({
@@ -30,22 +52,14 @@ const deleteMonsterActions = async (monsterId: number, actionId: number): Promis
         if (!monsterPrisma) {
             throw new Error(`Monster with ID ${monsterId} not found.`);
         }
-
-        // Convert the fetched monster to a Monster class instance
-        const monster = Monster.from(monsterPrisma);
-
-        // Remove the action using the removeAction method
-        monster.removeAction(actionId);
-
-        // Update the monster in the database with the new actions list
         const updatedMonsterPrisma = await database.monster.update({
             where: { id: monsterId },
             data: {
                 actions: {
-                    set: [], // Prisma syntax to disconnect all related actions
+                    set: [], 
                 },
             },
-            include: { actions: true }, // Fetch updated actions
+            include: { actions: true }, 
         });
 
         // Return the updated monster
@@ -101,7 +115,7 @@ const createMonster = async ({
         throw new Error('Database error. See server log for details.');
     }
 };
-export default { getAllMonsters,createMonster,deleteMonsterActions };// getMonsterById,deleteMonster
+export default { getAllMonsters,createMonster,deleteMonsterActions,getMonsterById };
 
 //const actions: Action[] = [
     //     new Action({
