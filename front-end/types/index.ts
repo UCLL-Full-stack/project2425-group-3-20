@@ -24,3 +24,12 @@ export type Action = {
     attackBonus: number;
     damage: string;
 };
+export type User = {
+    name: string;
+    password: string;
+
+};
+export type StatusMessage = {
+    message: string;
+    type: "error" | "success";
+};
