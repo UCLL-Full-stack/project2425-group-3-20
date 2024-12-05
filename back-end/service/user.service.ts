@@ -35,13 +35,13 @@ const createUser = async ({name,email,role,password}: UserInput): Promise<User> 
     });
     return user;
 };
-const authenticate = async ({name, role,password}:UserInput): Promise<AuthenticationResponse> => {
+const authenticate = async ({name, password}:UserInput): Promise<AuthenticationResponse> => {
     const user = await getUserByUsername({name});
     if (!user) throw new Error('Invalid username or password.');
     const hassedpassword = await bcrypt.hash(password, 10);
     const isPasswordValid = await bcrypt.compare(password, hassedpassword);
     if (!isPasswordValid) throw new Error('Invalid username or password.');
-
+    const role =  user.getRole();
     const token = generateJwtToken({name,role});
     return {
         name,

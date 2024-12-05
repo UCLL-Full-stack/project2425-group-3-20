@@ -30,8 +30,6 @@
  *            password:
  *              type: string
  *              description: User password.
- *            role:
- *              $ref: '#/components/schemas/Role'
  *      User:
  *          type: object
  *          properties:
