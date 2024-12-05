@@ -37,10 +37,8 @@ model Monster{
     movement    Int
     //ownerId     Int
     //owner       User       @relation(fields: [ownerId], references: [id])
-    actions     Action[]   
-
-
-    EncounterTable EncounterTable[]
+    actions     Action[]
+    EncounterTable EncounterTable[]   
 }
 model User{
   id       Int    @id @default(autoincrement()) 
@@ -61,7 +59,7 @@ model EncounterTable {
     id          Int      @id @default(autoincrement())
     name        String
     description String
-    monsters    Monster[]
     ownerId     Int
     owner       User       @relation(fields: [ownerId], references: [id])
+    monsters    Monster[]
 }
