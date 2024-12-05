@@ -1,5 +1,4 @@
 import { Monster } from "./monster";
-import { Action } from "./action";
 import { EncounterTable as EncounterTablePrisma, Monster as MonsterPrisma, Action as ActionPrisma } from "@prisma/client";
 
 export class EncounterTable {
@@ -38,7 +37,7 @@ export class EncounterTable {
     static from({
         id,
         name,
-        monsters = []
+        monsters = [],
     }: EncounterTablePrisma & { monsters: (MonsterPrisma & { actions: ActionPrisma[] })[] }): EncounterTable {
         return new EncounterTable({
             id,
