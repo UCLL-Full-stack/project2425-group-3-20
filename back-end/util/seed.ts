@@ -11,20 +11,30 @@ const main = async () => {
     await prisma.action.deleteMany();
 
     // Create users
-    const user1 = await prisma.user.create({
+    const frans = await prisma.user.create({
         data: {
-            email: "user1@gmail.com",
-            password: await bcrypt.hash("password", 10),
-            name: "user1",
+            email: "frans@gmail.com",
+            password: await bcrypt.hash("frans123", 10),
+            name: "frans",
             role: "gameMaster",
+            
+        },
+    });
+    const jan = await prisma.user.create({
+        data: {
+            email: "jan@gmail.com",
+            password: await bcrypt.hash("jan123", 10),
+            name: "jan",
+            role: "guest",
+            
         },
     });
 
-    const user2 = await prisma.user.create({
+    const admin = await prisma.user.create({
         data: {
-            email: "user2@gmail.com",
-            password: await bcrypt.hash("password2", 10),
-            name: "user2",
+            email: "admin@gmail.com",
+            password: await bcrypt.hash("admin123", 10),
+            name: "admin",
             role: "admin",
         },
     });
@@ -121,7 +131,7 @@ const main = async () => {
             name: "Goblin Encounter",
             description: "A group of goblins are attacking the village",
             owner: {
-                connect: { id: user1.id },
+                connect: { id: frans.id },
             },
             monsters: {
                 connect: [{ id: monster1.id }],
@@ -134,7 +144,7 @@ const main = async () => {
             name: "Orc Encounter",
             description: "A group of orcs are attacking the village",
             owner: {
-                connect: { id: user1.id },
+                connect: { id: frans.id },
             },
             monsters: {
                 connect: [{ id: monster2.id }],
@@ -147,7 +157,7 @@ const main = async () => {
             name: "Hill Giant Encounter",
             description: "A lone hill giant wreaking havoc on the countryside",
             owner: {
-                connect: { id: user2.id },
+                connect: { id: admin.id },
             },
             monsters: {
                 connect: [{ id: monster3.id }],
