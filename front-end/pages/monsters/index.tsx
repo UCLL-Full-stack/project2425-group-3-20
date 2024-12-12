@@ -7,7 +7,6 @@ import Header from '@components/header';
 
 const Monsters: React.FC = () => {
     const [monsters, setMonsters] = useState<Monster[]>([]);
-
     const getMonsters = async () => {
         const response = await MonsterService.getAllMonsters();
         const monsters = await response.json();

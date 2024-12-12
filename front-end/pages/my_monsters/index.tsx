@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Monster } from '@types';
+import { LoggedInUser, Monster } from '@types';
 import MonsterService from '@services/MonsterService';
 import MonsterTable from '@components/monsters/monsterTable';
 import Head from 'next/head';
@@ -8,7 +8,29 @@ import MyMonsterTable from '@components/myMonsterTable.tsx/myMonsterTable';
 
 const Monsters: React.FC = () => {
     const [monsters, setMonsters] = useState<Monster[]>([]);
-
+    const [loggedInUser, setLoggedInUser] = useState<LoggedInUser | null>(null);
+    useEffect(() => {
+        const loggedInUserString = localStorage.getItem("loggedInUser");
+        if (loggedInUserString !==null) { 
+          setLoggedInUser(JSON.parse(loggedInUserString));
+        } 
+        
+      }, []);
+    
+    if (!loggedInUser || (loggedInUser.role !== 'admin' && loggedInUser.role !== 'gameMaster')) {
+        return (
+            <>
+                <Head>
+                    <title>Access Denied</title>
+                </Head>
+                <Header />
+                <main className='d-flex flex-column justify-content-center align-items-center'>
+                    <h1>Access Denied</h1>
+                    <p>You do not have the required permissions to view this page.</p>
+                </main>
+            </>
+        );
+    }
     const getMonsters = async () => {
         const response = await MonsterService.getAllMonstersByUser();
         const monsters = await response.json();
@@ -18,7 +40,6 @@ const Monsters: React.FC = () => {
     useEffect(() => {
         getMonsters();
     }, []);
-
     return (
         <>
             <Head>

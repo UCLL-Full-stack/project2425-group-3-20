@@ -69,6 +69,14 @@ const monsterOverviewTable: React.FC<Props> = ({ monsters }: Props) => {
                 <td>{monster.cr}</td>
                 <td>{monster.type}</td>
                 <td>{monster.movement}</td>
+                {loggedInUser && loggedInUser.role=="admin" &&(<td>
+                  <button className="px-5 py-2 bg-red-700 text-black border-none rounded cursor-pointer transition-colors duration-300 hover:bg-red-300" onClick={((event) => {
+                    event.stopPropagation();
+                    if (monster.id !== undefined) {
+                      deleteActions(monster.id);
+                    }
+                  })}>Delete Actions</button>
+                </td>)}
               </tr>
             ))}
           </tbody>
