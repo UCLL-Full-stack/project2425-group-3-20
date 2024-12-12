@@ -5,7 +5,12 @@ const getAllEncounterTables = async (): Promise<EncounterTable[]> => {
     try {
         const encounterTablePrisma = await database.encounterTable.findMany({
             include: {
-                monsters: true
+                monsters:{
+                    include:{
+                        actions:true,
+                        owner:true
+                    }
+                }
             }
         });
         return encounterTablePrisma.map((encounterTablePrisma) => EncounterTable.from(encounterTablePrisma));
@@ -21,7 +26,7 @@ const getEncounterTableById = async (id: number): Promise<EncounterTable> => {
                 id: id
             },
             include: {
-                monsters: true
+                monsters:{include:{actions:true, owner:true}} 
             }
         });
         if (!encounterTablePrisma) {

@@ -3,6 +3,7 @@ import { User } from "./user";
 import {
     Monster as MonsterPrisma,
     Action as ActionPrisma,
+    User as UserPrisma,
 } from '@prisma/client';
 export class Monster {
     private id?: number;
@@ -21,7 +22,7 @@ export class Monster {
     private cr: string;
     private type: string;
     private movement: number;
-    //private owner: User;
+    private owner: User;
 
     constructor(monster: {
         id?: number;
@@ -40,7 +41,7 @@ export class Monster {
         cr: string;
         type: string;
         movement: number;
-        //owner: User;
+        owner: User;
     }) {
         this.id = monster.id;
         this.name = monster.name;
@@ -58,7 +59,7 @@ export class Monster {
         this.cr = monster.cr;
         this.type = monster.type;
         this.movement = monster.movement;
-        //this.owner = monster.owner;
+        this.owner = monster.owner;
     }
     
     static from({
@@ -78,7 +79,8 @@ export class Monster {
         cr,
         type,
         movement,
-    }: MonsterPrisma &{actions: ActionPrisma[]}
+        owner
+    }: MonsterPrisma &{actions: ActionPrisma[],owner:UserPrisma }
     ): Monster {
         return new Monster({
             id,
@@ -97,6 +99,7 @@ export class Monster {
             cr,
             type,
             movement,
+            owner: User.from(owner)
         });
     }
     
@@ -228,11 +231,11 @@ export class Monster {
             this.actions = this.actions.filter(action => action.getId() !== actionId);
         }
     
-        /* getOwner(): User {
+        getOwner(): User {
             return this.owner;
         }
     
         setOwner(owner: User) {
             this.owner = owner;
-        } */
+        } 
 }

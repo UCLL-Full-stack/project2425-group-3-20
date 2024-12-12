@@ -82,6 +82,9 @@ const main = async () => {
             actions: {
                 connect: [{ id: action1.id }],
             },
+            owner:{
+                connect : {id:admin.id}
+            }
         },
     });
 
@@ -102,6 +105,9 @@ const main = async () => {
             actions: {
                 connect: [{ id: action2.id }],
             },
+            owner:{
+                connect : {id:frans.id}
+            }
         },
     });
 
@@ -122,6 +128,9 @@ const main = async () => {
             actions: {
                 connect: [{ id: action3.id }],
             },
+            owner:{
+                connect : {id:frans.id}
+            }
         },
     });
 
