@@ -27,9 +27,13 @@ export type Action = {
 export type User = {
     name: string;
     password: string;
-
 };
 export type StatusMessage = {
     message: string;
     type: "error" | "success";
 };
+export type LoggedInUser  ={
+    name: string;
+    password: string;
+    role:string;
+}

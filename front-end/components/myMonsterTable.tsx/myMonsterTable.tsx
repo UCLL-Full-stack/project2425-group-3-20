@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { LoggedInUser, Monster } from "@types";
+import React from "react";
+import { Monster } from "@types";
 import { useRouter } from "next/router";
 import MonsterService from "@services/MonsterService";
 
@@ -7,16 +7,9 @@ type Props = {
   monsters: Array<Monster>;
 };
 
-const monsterOverviewTable: React.FC<Props> = ({ monsters }: Props) => {
+const my_monsterOverviewTable: React.FC<Props> = ({ monsters }: Props) => {
     const router = useRouter();
-    const [loggedInUser, setLoggedInUser] = useState<LoggedInUser | null>(null);
-    useEffect(() => {
-        const loggedInUserString = localStorage.getItem("loggedInUser");
-        if (loggedInUserString !==null) { 
-          setLoggedInUser(JSON.parse(loggedInUserString));
-        } 
-        
-      }, []);
+
     const deleteActions = async (id: number) => {
         const response = await MonsterService.deleteActions(id);
         if (response.ok) {
@@ -45,6 +38,7 @@ const monsterOverviewTable: React.FC<Props> = ({ monsters }: Props) => {
               <th scope="col">Challenge Rating</th>
               <th scope="col">Type</th>
               <th scope="col">Movement</th>
+              <th scope="col">Delete Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -69,6 +63,14 @@ const monsterOverviewTable: React.FC<Props> = ({ monsters }: Props) => {
                 <td>{monster.cr}</td>
                 <td>{monster.type}</td>
                 <td>{monster.movement}</td>
+                <td>
+                  <button className="px-5 py-2 bg-red-700 text-black border-none rounded cursor-pointer transition-colors duration-300 hover:bg-red-300" onClick={((event) => {
+                    event.stopPropagation();
+                    if (monster.id !== undefined) {
+                      deleteActions(monster.id);
+                    }
+                  })}>Delete Actions</button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -78,4 +80,4 @@ const monsterOverviewTable: React.FC<Props> = ({ monsters }: Props) => {
   );
 };
 
-export default monsterOverviewTable;
+export default my_monsterOverviewTable;

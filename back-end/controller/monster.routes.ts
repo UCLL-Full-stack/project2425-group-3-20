@@ -138,7 +138,7 @@ monsterRouter.put('/:monsterId', async (req: Request, res: Response, next: NextF
 });
 /**
  * @swagger
- * /monsters/{userId}:
+ * /monsters/own:
  *   get:
  *     security:
  *       - bearerAuth: []
@@ -163,11 +163,11 @@ monsterRouter.put('/:monsterId', async (req: Request, res: Response, next: NextF
  *                   type: string
  *                   example: "User  with ID not found"
  */
-monsterRouter.get('/:userId',  async (req: Request, res: Response, next: NextFunction) => {
+monsterRouter.get('/own',  async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const request = req as Request & { auth: { username: string; role: Role } };
-        const { username, role } = request.auth
-        const monsters = await monsterService.getMonstersByUser(username);
+        const request = req as Request & { auth: { name: string; role: Role } };
+        const { name, role } = request.auth
+        const monsters = await monsterService.getMonstersByUser(name);
         res.json(monsters);
     } catch (err) {
         next(err);

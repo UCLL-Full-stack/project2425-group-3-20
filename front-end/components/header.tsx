@@ -1,9 +1,9 @@
-import { User } from "@types";
+import { LoggedInUser } from "@types";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const Header: React.FC = () => {
-    const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
+    const [loggedInUser, setLoggedInUser] = useState<LoggedInUser | null>(null);
     useEffect(() => {
         const loggedInUserString = localStorage.getItem("loggedInUser");
         if (loggedInUserString !==null) { 
@@ -26,6 +26,11 @@ const Header: React.FC = () => {
                 <Link href='/monsters' className="nav-link px-4 fs-5">
                     Monsters
                 </Link>
+                {loggedInUser&&loggedInUser.role == "gameMaster"&&(
+                  <Link href='/my_monsters' className="nav-link px-4 fs-5">
+                   my Monsters
+                  </Link>
+                )}
                 {!loggedInUser && (
                 <Link
                   href="/login"
