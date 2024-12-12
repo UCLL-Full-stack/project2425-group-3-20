@@ -12,7 +12,7 @@ const getAllUsers = async (): Promise<User[]> => {
     }
 };
 
-const getUserById = async ({ id }: { id: number }): Promise<User | null> => {
+const getUserById = async (  id: number ): Promise<User | null> => {
     try {
         const userPrisma = await database.user.findUnique({
             where: { id },

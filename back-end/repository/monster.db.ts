@@ -2,8 +2,10 @@ import { Monster } from '../model/monster';
 import database from '../util/database';
 import { Action } from '../model/action';
 import { Monster as MonsterPrisma,
-        Action as ActionPrisma
+        Action as ActionPrisma,
+        User as UserPrisma
  } from '@prisma/client';
+import { connect } from 'http2';
 
 
  
@@ -12,6 +14,7 @@ const getAllMonsters  = async (): Promise<Monster[]> => {
         const monstersPrisma = await database.monster.findMany({
             include: {
                 actions: true, 
+                owner:true
             },
         });
         return monstersPrisma.map((monsterPrisma) => Monster.from(monsterPrisma))
@@ -27,6 +30,7 @@ const getMonsterById = async (id: number): Promise<Monster | null> => {
             },
             include: {
                 actions: true, 
+                owner:true
             },
         });
 
@@ -35,6 +39,27 @@ const getMonsterById = async (id: number): Promise<Monster | null> => {
         }
 
         return Monster.from(monsterPrisma);
+    } catch (error) {
+        throw new Error('Database error. See server log for details.');
+    }
+};
+const getMonstersByUser = async (userId: number): Promise<Monster[]> => {
+    try {
+        const monstersPrisma = await database.monster.findMany({
+            where: {
+                ownerId: userId, // Filter by the owner's ID
+            },
+            include: {
+                actions: true,  // Include associated actions
+                owner: true,    // Include owner details
+            },
+        });
+
+        if (!monstersPrisma || monstersPrisma.length === 0) {
+            throw new Error(`No monsters found for user with ID ${userId}`);
+        }
+
+        return monstersPrisma.map((monsterPrisma) => Monster.from(monsterPrisma));
     } catch (error) {
         throw new Error('Database error. See server log for details.');
     }
@@ -59,7 +84,10 @@ const deleteMonsterActions = async (monsterId: number): Promise<Monster> => {
                     set: [], 
                 },
             },
-            include: { actions: true }, 
+            include: { 
+                actions: true,
+                owner:true
+             }, 
         });
 
         // Return the updated monster
@@ -85,7 +113,8 @@ const createMonster = async ({
     cr,
     type,
     movement,
-}: MonsterPrisma & { actions?: ActionPrisma[] }): Promise<Monster> => { // Note optional actions
+    owner
+}: MonsterPrisma & { actions?: ActionPrisma[],owner:UserPrisma }): Promise<Monster> => { // Note optional actions
     try {
         const monsterPrisma = await database.monster.create({
             data: {
@@ -106,8 +135,9 @@ const createMonster = async ({
                 cr,
                 type,
                 movement,
+                owner: { connect: { id: owner.id } }
             },
-            include: { actions: true }, // Include actions for completeness
+            include: { actions: true, owner:true }, // Include actions for completeness
         });
         return Monster.from(monsterPrisma);
     } catch (error) {
@@ -115,7 +145,7 @@ const createMonster = async ({
         throw new Error('Database error. See server log for details.');
     }
 };
-export default { getAllMonsters,createMonster,deleteMonsterActions,getMonsterById };
+export default { getAllMonsters,createMonster,deleteMonsterActions,getMonsterById,getMonstersByUser };
 
 //const actions: Action[] = [
     //     new Action({
