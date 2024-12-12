@@ -31,7 +31,7 @@ const Header: React.FC = () => {
                   href="/login"
                   className="nav-link px-4 fs-5"
                 >
-                  login
+                  Login
                 </Link>
                   )}
                   {loggedInUser && (
@@ -40,7 +40,7 @@ const Header: React.FC = () => {
                       onClick={handleClick}
                       className="nav-link px-4 fs-5"
                   >
-                      logout
+                      Logout
                   </a>
                   )}
                   {loggedInUser && (
