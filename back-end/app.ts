@@ -7,6 +7,7 @@ import swaggerUi from 'swagger-ui-express';
 import actionRouter from './controller/action.routes';
 import monsterRouter from './controller/monster.routes';
 import { userRouter } from './controller/user.routes';
+import { expressjwt } from 'express-jwt';
 
 const app = express();
 dotenv.config();
@@ -35,7 +36,20 @@ app.get('/status', (req, res) => {
 app.listen(port || 3000, () => {
     console.log(`Back-end is running on port ${port}.`);
 });
-
+app.use(
+    expressjwt({
+        secret: process.env.JWT_SECRET || 'default_secret',
+        algorithms: ['HS256'],
+    }).unless({
+        path: [
+            '/api-docs',
+            '/users/login',
+            '/users/signup',
+            '/monsters',
+            '/status',
+        ],
+    })
+);
 app.use('/actions', actionRouter);
 
 app.use('/monsters', monsterRouter);

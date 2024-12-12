@@ -21,6 +21,8 @@ const actionRouter = express.Router();
  * @swagger
  * /actions:
  *   get:
+ *     security:
+ *       - bearerAuth: []
  *     summary: Retrieve a list of actions
  *     responses:
  *       200:
@@ -45,6 +47,8 @@ actionRouter.get('/', async (req: Request, res: Response, next: NextFunction) =>
  * @swagger
  * /actions/{id}:
  *   get:
+ *     security:
+ *       - bearerAuth: []
  *     summary: Retrieve a single action by ID
  *     parameters:
  *       - in: path

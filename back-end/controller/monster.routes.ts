@@ -62,6 +62,7 @@
  */
 import express, { NextFunction, Request, Response } from 'express';
 import monsterService from '../service/monster.service';
+import { Role } from '../types';
 
 const monsterRouter = express.Router();
 
@@ -93,6 +94,8 @@ monsterRouter.get('/', async (req: Request, res: Response, next: NextFunction) =
  * @swagger
  * /monsters/{monsterId}:
  *   put:
+ *     security:
+ *       - bearerAuth: []
  *     summary: Delete a monster action by monster ID and action ID, then return the associated monster
  *     parameters:
  *       - in: path
@@ -128,6 +131,43 @@ monsterRouter.get('/', async (req: Request, res: Response, next: NextFunction) =
 monsterRouter.put('/:monsterId', async (req: Request, res: Response, next: NextFunction) => {
     try {
         const monsters = await monsterService.deleteMonsterActions(Number(req.params.monsterId));
+        res.json(monsters);
+    } catch (err) {
+        next(err);
+    }
+});
+/**
+ * @swagger
+ * /monsters/{userId}:
+ *   get:
+ *     security:
+ *       - bearerAuth: []
+ *     summary: Retrieve a list of monsters by user ID
+ *     responses:
+ *       200:
+ *         description: A list of monsters associated with the user
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Monster'
+ *       404:
+ *         description: User with the specified ID not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "User  with ID not found"
+ */
+monsterRouter.get('/:userId',  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const request = req as Request & { auth: { username: string; role: Role } };
+        const { username, role } = request.auth
+        const monsters = await monsterService.getMonstersByUser(username);
         res.json(monsters);
     } catch (err) {
         next(err);

@@ -25,7 +25,7 @@ const getUserById = async (  id: number ): Promise<User | null> => {
     }
 };
 
-const getUserByUsername = async ({ name }: { name: string }): Promise<User | null> => {
+const getUserByUsername = async (  name: string ): Promise<User | null> => {
     try {
         const userPrisma = await database.user.findFirst({
             where: { name },

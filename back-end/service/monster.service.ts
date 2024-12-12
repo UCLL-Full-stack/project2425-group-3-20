@@ -13,12 +13,15 @@ const getMonsterById = async (monsterId: number): Promise<Monster | undefined> =
     }
     return monster;
 }
-const getMonstersByUser = async(userId:number):Promise<Monster[]|undefined>=>{
-    const user = await userDb.getUserById(userId)
+const getMonstersByUser = async(username:string):Promise<Monster[]|undefined>=>{
+    const user = await userDb.getUserByUsername(username)
     if (!user){
-        throw new Error(`User with id ${userId} not found`)
+        throw new Error(`User with username ${username} not found`)
     }
-    const monsters : Monster[] = await monsterDb.getMonstersByUser(userId)
+    if (user.getId()== undefined){
+        throw new Error(`User has no Id`)
+    }
+    const monsters : Monster[] = await monsterDb.getMonstersByUser(user.getId()!)
     return monsters
 }
 const deleteMonsterActions = async (monsterId:number): Promise<Monster| undefined> => {
@@ -31,4 +34,4 @@ const deleteMonsterActions = async (monsterId:number): Promise<Monster| undefine
 }
 
 
-export default { getAllMonsters, getMonsterById,deleteMonsterActions};
+export default { getAllMonsters, getMonsterById,deleteMonsterActions,getMonstersByUser};

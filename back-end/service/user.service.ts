@@ -6,8 +6,8 @@ import { generateJwtToken } from '../util/jwt';
 
 const getAllUsers = async (): Promise<User[]> => userDB.getAllUsers();
 
-const getUserByUsername = async ({ name  }: { name: string }): Promise<User> => {
-    const user = await userDB.getUserByUsername({ name });
+const getUserByUsername = async ( name: string ): Promise<User> => {
+    const user = await userDB.getUserByUsername( name );
     if (!user) {
         throw new Error(`User with username: ${name} does not exist.`);
     }
@@ -15,7 +15,7 @@ const getUserByUsername = async ({ name  }: { name: string }): Promise<User> => 
 };
 const createUser = async ({name,email,role,password}: UserInput): Promise<User> => {
     // Check if user already exists
-    const existingUser = await userDB.getUserByUsername({name});
+    const existingUser = await userDB.getUserByUsername(name);
     if (existingUser) {
         throw new Error('Username is already taken');
     }
@@ -36,7 +36,7 @@ const createUser = async ({name,email,role,password}: UserInput): Promise<User> 
     return user;
 };
 const authenticate = async ({name, password}:UserInput): Promise<AuthenticationResponse> => {
-    const user = await getUserByUsername({name});
+    const user = await getUserByUsername(name);
     if (!user) throw new Error('Invalid username or password.');
     const hassedpassword = await bcrypt.hash(password, 10);
     const isPasswordValid = await bcrypt.compare(password, hassedpassword);
