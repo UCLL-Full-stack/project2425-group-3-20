@@ -112,9 +112,9 @@
  *         movement:
  *           type: integer
  *           description: The movement speed of the monster (in feet).
- *         user:
- *           $ref: '#/components/schemas/User'
- *           description: The user who created or owns the monster.
+ *         ownername:
+ *           type: string
+ *           description: The type or classification of the monster.
  *     User:
  *       type: object
  *       properties:
@@ -301,10 +301,8 @@ monsterRouter.get('/own',  async (req: Request, res: Response, next: NextFunctio
  */
 monsterRouter.post('/', async (req:Request, res:Response,next:NextFunction) => {
     try {
-        const request = req as Request & { auth: { name: string; role: Role } };
-        const { name, role } = request.auth
         const monsterInput: MonsterInput = req.body;
-        const monster = await monsterService.createMonster(monsterInput,name);
+        const monster = await monsterService.createMonster(monsterInput);
         res.json(monster);
     } catch (error) {
         console.error(error);

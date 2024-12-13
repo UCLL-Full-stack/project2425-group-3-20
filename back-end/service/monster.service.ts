@@ -32,10 +32,11 @@ const createMonster = async ({
     cr,
     type,
     movement,
-}: MonsterInput,username:string): Promise<Monster> => {
-    const owner:User = await userService.getUserByUsername(username);
+    ownername,
+}: MonsterInput): Promise<Monster> => {
+    const owner:User = await userService.getUserByUsername(ownername);
     if (!owner)
-        throw new Error(`Username with name${username} found`);
+        throw new Error(`Username with name${ownername} found`);
 
     const monster = await monsterDb.createMonster({
         id: 0, // or whatever logic you have for generating the id

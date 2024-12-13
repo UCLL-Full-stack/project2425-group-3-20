@@ -31,6 +31,11 @@ const Header: React.FC = () => {
                    my Monsters
                   </Link>
                 )}
+                {loggedInUser&&loggedInUser.role == "gameMaster"&&(
+                  <Link href='/createmonster' className="nav-link px-4 fs-5">
+                   Monster creater
+                  </Link>
+                )}
                 {!loggedInUser && (
                 <Link
                   href="/login"

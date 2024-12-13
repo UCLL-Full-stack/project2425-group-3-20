@@ -2,7 +2,7 @@ import { Monster } from "@types";
 import { get } from "http";
 
 const getAllMonsters = async () => {
-    return fetch(process.env.NEXT_PUBLIC_API_URL+"/monsters",{
+    return fetch(process.env.NEXT_PUBLIC_API_URL+"/monsters/all",{
       method:"GET",
       headers:{
         "Content-Type" : "application/json"
@@ -10,14 +10,28 @@ const getAllMonsters = async () => {
     })
 };
 const createMonster = async(monster:Monster)=>{
-  return fetch(process.env.NEXT_PUBLIC_API_URL + "/monster", {
-    method: "POST",
+  const loggedInUser = localStorage.getItem("loggedInUser");
 
+  if (!loggedInUser) {
+    throw new Error("No logged-in user found");
+  }
+
+  const user = JSON.parse(loggedInUser);
+  const token = user.token;
+
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/monsters/`, {
+    method: "POST",
     headers: {
-        "Content-Type": "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(monster),
-});
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch monsters: ${response.statusText}`);
+  }
+
+  return response;
 };
 
 const getAllMonstersByUser = async () => {
@@ -56,7 +70,8 @@ const deleteActions = async (id: number) => {
 const MonsterService = {
     getAllMonsters,
     deleteActions,
-    getAllMonstersByUser
+    getAllMonstersByUser,
+    createMonster
 };
 export default MonsterService;
   

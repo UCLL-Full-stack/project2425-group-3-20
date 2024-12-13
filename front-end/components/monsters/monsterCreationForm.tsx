@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
-import { StatusMessage } from "@types";
+import { LoggedInUser, StatusMessage } from "@types";
 import MonsterService from "@services/MonsterService";
 
 const MonsterCreationForm = () => {
+  const [loggedInUser, setLoggedInUser] = useState<LoggedInUser | null>(null);
   const [name, setName] = useState("");
   const [str, setStr] = useState(0);
   const [dex, setDex] = useState(0);
@@ -15,12 +16,12 @@ const MonsterCreationForm = () => {
   const [cha, setCha] = useState(0);
   const [ac, setAc] = useState(0);
   const [hp, setHp] = useState(0);
-  const [immunities, setImmunities] = useState(""); // CSV format
-  const [languages, setLanguages] = useState(""); // CSV format
-  const [cr, setCr] = useState(0);
+  const [immunities, setImmunities] = useState("");
+  const [languages, setLanguages] = useState(""); 
+  const [cr, setCr] = useState("");
   const [type, setType] = useState("");
-  const [movement, setMovement] = useState("");
-  const [owner, setOwner] = useState("");
+  const [movement, setMovement] = useState(0);
+  const [ownername,setOwnername] = useState("")
   const [statusMessages, setStatusMessages] = useState<StatusMessage[]>([]);
 
   const { t } = useTranslation();
@@ -36,8 +37,16 @@ const MonsterCreationForm = () => {
     if (hp <= 0) errors.push(t("monster.validate.hp"));
     return errors;
   };
-
+  useEffect(() => {
+    const loggedInUserString = localStorage.getItem("loggedInUser");
+    if (loggedInUserString !==null) { 
+      setLoggedInUser(JSON.parse(loggedInUserString));
+    } 
+    
+  }, []);
   const handleSubmit = async (event: React.FormEvent) => {
+
+    const ownername = loggedInUser!.name
     event.preventDefault();
     setStatusMessages([]);
 
@@ -63,6 +72,7 @@ const MonsterCreationForm = () => {
         cr,
         type,
         movement,
+        ownername
       };
 
       const response = await MonsterService.createMonster(payload); // Call your monster creation logic
@@ -136,7 +146,7 @@ const MonsterCreationForm = () => {
         </div>
         <div>
           <label>{t("monster.label.cr")}</label>
-          <input type="number" value={cr} onChange={(e) => setCr(Number(e.target.value))} />
+          <input type="string" value={cr} onChange={(e) => setCr(e.target.value)} />
         </div>
         <div>
           <label>{t("monster.label.type")}</label>
@@ -144,7 +154,7 @@ const MonsterCreationForm = () => {
         </div>
         <div>
           <label>{t("monster.label.movement")}</label>
-          <input value={movement} onChange={(e) => setMovement(e.target.value)} />
+          <input value={movement} onChange={(e) => setMovement(Number(e.target.value))} />
         </div>
         <button type="submit">{t("monster.button.submit")}</button>
       </form>
