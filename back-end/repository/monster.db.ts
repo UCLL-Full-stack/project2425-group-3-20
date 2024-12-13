@@ -105,16 +105,15 @@ const createMonster = async ({
     int,
     wis,
     cha,
-    actions = [], // Default to empty array
     ac,
     hp,
-    immunities = [], // Default to empty array
-    languages = [],  // Default to empty array
+    immunities = [], 
+    languages = [],  
     cr,
     type,
     movement,
     owner
-}: MonsterPrisma & { actions?: ActionPrisma[],owner:UserPrisma }): Promise<Monster> => { // Note optional actions
+}: MonsterPrisma & { actions?: ActionPrisma[],owner:UserPrisma }): Promise<Monster> => { 
     try {
         const monsterPrisma = await database.monster.create({
             data: {
@@ -125,9 +124,6 @@ const createMonster = async ({
                 int,
                 wis,
                 cha,
-                actions: actions.length
-                    ? { connect: actions.map(action => ({ id: action.id })) }
-                    : undefined,
                 ac,
                 hp,
                 immunities,
@@ -145,7 +141,7 @@ const createMonster = async ({
         throw new Error('Database error. See server log for details.');
     }
 };
-export default { getAllMonsters,createMonster,deleteMonsterActions,getMonsterById,getMonstersByUser };
+export default { getAllMonsters,createMonster,deleteMonsterActions,getMonsterById,getMonstersByUser, };
 
 //const actions: Action[] = [
     //     new Action({

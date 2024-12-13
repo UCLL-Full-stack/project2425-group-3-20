@@ -1,6 +1,9 @@
 import monsterDb from '../repository/monster.db'
 import { Monster } from '../model/monster';
 import userDb from '../repository/user.db';
+import { MonsterInput,UserInput } from '../types';
+import userService from './user.service';
+import { User } from '../model/user';
 
 const getAllMonsters = async (): Promise<Monster[]> => {
     return monsterDb.getAllMonsters();
@@ -13,6 +16,58 @@ const getMonsterById = async (monsterId: number): Promise<Monster | undefined> =
     }
     return monster;
 }
+
+const createMonster = async ({
+    name,
+    str,
+    dex,
+    con,
+    int,
+    wis,
+    cha,
+    ac,
+    hp,
+    immunities = [],
+    languages = [],
+    cr,
+    type,
+    movement,
+}: MonsterInput,username:string): Promise<Monster> => {
+    const owner:User = await userService.getUserByUsername(username);
+    if (!owner)
+        throw new Error(`Username with name${username} found`);
+
+    const monster = await monsterDb.createMonster({
+        id: 0, // or whatever logic you have for generating the id
+        name,
+        str,
+        dex,
+        con,
+        int,
+        wis,
+        cha,
+        ac,
+        hp,
+        immunities,
+        languages,
+        cr,
+        type,
+        movement,
+        ownerId:owner.getId()!,
+        owner: {
+            id: owner.getId()!, 
+            name: owner.getName()!,
+            email: owner.getEmail()!, 
+            password: owner.getPassword()!, 
+            role: owner.getRole()!, 
+        },
+    });
+    return monster;
+}
+
+
+
+
 const getMonstersByUser = async(username:string):Promise<Monster[]|undefined>=>{
     const user = await userDb.getUserByUsername(username)
     if (!user){
@@ -34,4 +89,4 @@ const deleteMonsterActions = async (monsterId:number): Promise<Monster| undefine
 }
 
 
-export default { getAllMonsters, getMonsterById,deleteMonsterActions,getMonstersByUser};
+export default { getAllMonsters, getMonsterById,deleteMonsterActions,getMonstersByUser,createMonster};

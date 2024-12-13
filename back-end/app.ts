@@ -45,7 +45,7 @@ app.use(
             '/api-docs',
             '/users/login',
             '/users/signup',
-            '/monsters',
+            '/monsters/all',
             '/status',
         ],
     })

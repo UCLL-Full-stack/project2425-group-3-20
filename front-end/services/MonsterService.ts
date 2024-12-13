@@ -1,3 +1,4 @@
+import { Monster } from "@types";
 import { get } from "http";
 
 const getAllMonsters = async () => {
@@ -8,6 +9,17 @@ const getAllMonsters = async () => {
       }
     })
 };
+const createMonster = async(monster:Monster)=>{
+  return fetch(process.env.NEXT_PUBLIC_API_URL + "/monster", {
+    method: "POST",
+
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify(monster),
+});
+};
+
 const getAllMonstersByUser = async () => {
   const loggedInUser = localStorage.getItem("loggedInUser");
 
