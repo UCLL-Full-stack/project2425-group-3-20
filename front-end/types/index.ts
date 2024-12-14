@@ -15,6 +15,7 @@ export type Monster = {
     cr: string;
     type: string;
     movement: number;
+    ownername:string;
 };
 
 export type Action = {

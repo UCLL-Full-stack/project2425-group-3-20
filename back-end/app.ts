@@ -47,6 +47,7 @@ app.use(
             '/users/signup',
             '/monsters/all',
             '/status',
+            '/monsters'
         ],
     })
 );
