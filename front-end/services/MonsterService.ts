@@ -25,6 +25,7 @@ const createMonster = async(monster:Monster)=>{
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
+    body: JSON.stringify(monster),
   });
 
   if (!response.ok) {
