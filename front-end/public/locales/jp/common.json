@@ -1,0 +1,18 @@
+{
+    "app": {
+        "title": "ホーム",
+        "text": "ホーム"
+    },
+    "header": {
+        "nav": {
+            "title": "遭遇ビルダーのボブ",
+            "home": "ホーム",
+            "monster": "モンスター",
+            "my_monster": "私のモンスター",
+            "monster_creater": "モンスタークリエーター",
+            "login": "ログイン",
+            "logout": "ログアウト",
+            "welcome": "ようこそ"
+        }
+    }
+}

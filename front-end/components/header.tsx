@@ -1,9 +1,12 @@
 import { LoggedInUser } from "@types";
+import { useTranslation } from "next-i18next";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Language from "./language/Language";
 
 const Header: React.FC = () => {
     const [loggedInUser, setLoggedInUser] = useState<LoggedInUser | null>(null);
+    const { t } = useTranslation();
     useEffect(() => {
         const loggedInUserString = localStorage.getItem("loggedInUser");
         if (loggedInUserString !==null) { 
@@ -18,22 +21,22 @@ const Header: React.FC = () => {
       };
     return (
         <header className='d-flex justify-content-between align-items-center'>
-            <h1>Bob the Encounter Builder</h1>
+            <h1>{t('header.nav.title')}</h1>
             <nav className="nav justify-content-center">
                 <Link href='/' className="nav-link px-4 fs-5">
-                    Home
+                {t('header.nav.home')}
                 </Link>
                 <Link href='/monsters' className="nav-link px-4 fs-5">
-                    Monsters
+                {t('header.nav.monster')}
                 </Link>
                 {loggedInUser&&loggedInUser.role == "gameMaster"&&(
                   <Link href='/my_monsters' className="nav-link px-4 fs-5">
-                   my Monsters
+                   {t('header.nav.my_monster')}
                   </Link>
                 )}
                 {loggedInUser&&loggedInUser.role == "gameMaster"&&(
                   <Link href='/createmonster' className="nav-link px-4 fs-5">
-                   Monster creater
+                   {t('header.nav.monster_creater')}
                   </Link>
                 )}
                 {!loggedInUser && (
@@ -41,7 +44,7 @@ const Header: React.FC = () => {
                   href="/login"
                   className="nav-link px-4 fs-5"
                 >
-                  Login
+                  {t('header.nav.login')}
                 </Link>
                   )}
                   {loggedInUser && (
@@ -50,15 +53,16 @@ const Header: React.FC = () => {
                       onClick={handleClick}
                       className="nav-link px-4 fs-5"
                   >
-                      Logout
+                      {t('header.nav.logout')}
                   </a>
                   )}
                   {loggedInUser && (
                   <div className="text-black ms-5 mt-2 md:mt-0 pt-1 md:pt-0 grow">
-                      welcome {loggedInUser.name}
+                      {t('header.nav.welcome')} {loggedInUser.name}
                   </div>
                   )}
             </nav>
+            <Language />
         </header>
     );
 };

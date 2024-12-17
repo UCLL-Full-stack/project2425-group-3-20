@@ -1,0 +1,17 @@
+{   "app":{
+        "title":"Home",
+        "text":"Home"
+    },
+    "header": {
+        "nav": {
+            "title": "Bob the encounter builder",
+            "home": "Home",
+            "monster": "Monsters",
+            "my_monster":"My monsters",
+            "monster_creater":"Monster creator",
+            "login": "Login",
+            "logout": "Logout",
+            "welcome":"Welcome"
+        }
+    }
+}
