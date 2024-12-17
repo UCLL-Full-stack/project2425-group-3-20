@@ -75,4 +75,4 @@ encounterTableRouter.get('/:id', async (req: Request, res: Response, next: NextF
     }
 });
 
-export default encounterTableRouter;
+export {encounterTableRouter} ;
