@@ -8,6 +8,7 @@ import actionRouter from './controller/action.routes';
 import monsterRouter from './controller/monster.routes';
 import { userRouter } from './controller/user.routes';
 import { expressjwt } from 'express-jwt';
+import { encounterTableRouter } from './controller/encounterTable.routes';
 
 const app = express();
 dotenv.config();
@@ -47,7 +48,8 @@ app.use(
             '/users/signup',
             '/monsters/all',
             '/status',
-            '/monsters'
+            '/monsters',
+            '/encounterTables'
         ],
     })
 );
@@ -56,3 +58,5 @@ app.use('/actions', actionRouter);
 app.use('/monsters', monsterRouter);
 
 app.use('/users',userRouter)
+
+app.use('/encounterTables',encounterTableRouter)
