@@ -7,6 +7,7 @@ import swaggerUi from 'swagger-ui-express';
 import actionRouter from './controller/action.routes';
 import monsterRouter from './controller/monster.routes';
 import { userRouter } from './controller/user.routes';
+import encounterTableRouter from './controller/encounterTable.routes';
 import { expressjwt } from 'express-jwt';
 
 const app = express();
@@ -55,4 +56,6 @@ app.use('/actions', actionRouter);
 
 app.use('/monsters', monsterRouter);
 
-app.use('/users',userRouter)
+app.use('/users',userRouter);
+
+app.use('/encounterTables', encounterTableRouter);
