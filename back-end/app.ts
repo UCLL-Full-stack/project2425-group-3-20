@@ -7,6 +7,7 @@ import swaggerUi from 'swagger-ui-express';
 import actionRouter from './controller/action.routes';
 import monsterRouter from './controller/monster.routes';
 import { userRouter } from './controller/user.routes';
+import encounterTableRouter from './controller/encounterTable.routes';
 import { expressjwt } from 'express-jwt';
 import { encounterTableRouter } from './controller/encounterTable.routes';
 
