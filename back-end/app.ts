@@ -51,7 +51,6 @@ app.use(
             '/monsters/all',
             '/status',
             '/monsters',
-            '/encounterTables'
         ],
     })
 );

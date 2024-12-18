@@ -12,5 +12,9 @@ const getEncounterTableById = async (id: number): Promise<EncounterTable | undef
     }
     return encounterTable;
 }
+const deleteMonsterFromEncounterTable = async (encounterTableId:number,monsterId:number):Promise<EncounterTable| undefined> =>{
+    const updatedencounterTable= await encounterTableDb.deleteMonsterFromEncounterTable(encounterTableId,monsterId)
+    return updatedencounterTable
+}
 
-export default { getAllEncounterTables, getEncounterTableById };
+export default { getAllEncounterTables, getEncounterTableById,deleteMonsterFromEncounterTable };

@@ -26,6 +26,8 @@ const encounterTableRouter = express.Router();
  * @swagger
  * /encounterTables:
  *   get:
+ *     security:
+ *       - bearerAuth: []
  *     summary: Retrieve a list of encounter tables
  *     responses:
  *       200:
@@ -50,6 +52,8 @@ encounterTableRouter.get('/', async (req: Request, res: Response, next: NextFunc
  * @swagger
  * /encounterTables/{id}:
  *   get:
+ *     security:
+ *       - bearerAuth: []
  *     summary: Retrieve a single encounter table by ID
  *     parameters:
  *       - in: path
@@ -74,5 +78,45 @@ encounterTableRouter.get('/:id', async (req: Request, res: Response, next: NextF
         next(err);
     }
 });
+/**
+ * @swagger
+ * /encounterTables/{id}/{monsterid}:
+ *   put:
+ *     security:
+ *       - bearerAuth: []
+ *     summary: Remove a monster from an encounter table
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The encounter table ID
+ *       - in: path
+ *         name: monsterid
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The monster ID to remove
+ *     responses:
+ *       200:
+ *         description: The updated encounter table after removing the monster
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/EncounterTable'
+ *       404:
+ *         description: Encounter table or monster not found
+ *       500:
+ *         description: Internal server error
+ */
+encounterTableRouter.put('/:id/:monsterid', async (req:Request, res: Response,next:NextFunction)=>{
+    try{
+        const encounterTable =  await encounterTableService.deleteMonsterFromEncounterTable(parseInt(req.params.id),parseInt(req.params.monsterid))
+        res.json(encounterTable)
+    }catch (err){
+        next(err)
+    }
+})
 
 export {encounterTableRouter} ;
