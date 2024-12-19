@@ -1,15 +1,72 @@
 {
+    "login": {
+        "title": "ユーザーログイン",
+        "label": {
+            "username": "ユーザー名",
+            "password": "パスワード"
+        },
+        "validate": {
+            "name": "ユーザー名は必須です。",
+            "password": "パスワードは必須です。"
+        },
+        "button": "ログイン",
+        "success": "ログイン成功！",
+        "name": "ユーザー名",
+        "password": "パスワード",
+        "role": "役割"
+    },
+    "monster": {
+        "monsters": "すべてのモンスター",
+        "overview": "概要",
+        "deniedtext": "このページを表示する権限がありません。",
+        "title": {
+            "Create": "モンスターを作成",
+            "get": "すべてのモンスター",
+            "name": "すべてのモンスター",
+            "creator": "モンスター作成者",
+            "create": "モンスター作成",
+            "denied": "アクセス拒否",
+            "singup": "ユーザー登録"
+        },
+        "label": {
+            "name": "名前",
+            "str": "筋力",
+            "dex": "敏捷性",
+            "con": "耐久力",
+            "int": "知性",
+            "wis": "判断力",
+            "cha": "魅力",
+            "ac": "アーマークラス",
+            "hp": "ヒットポイント",
+            "immunities": "免疫",
+            "languages": "言語",
+            "cr": "挑戦度",
+            "type": "種類",
+            "movement": "移動速度",
+            "actions": "アクション"
+        },
+        "button": {
+            "submit": "送信",
+            "delete": "モンスターを削除"
+        },
+        "validate": {
+            "name": "名前は必須です。",
+            "stats": "すべてのステータスは0より大きくなければなりません。",
+            "ac": "アーマークラスは0より大きくなければなりません。",
+            "hp": "ヒットポイントは0より大きくなければなりません。"
+        }
+    },
     "app": {
         "title": "ホーム",
         "text": "ホーム"
     },
     "header": {
         "nav": {
-            "title": "遭遇ビルダーのボブ",
+            "title": "エンカウンタービルダーのボブ",
             "home": "ホーム",
             "monster": "モンスター",
             "my_monster": "私のモンスター",
-            "monster_creater": "モンスタークリエーター",
+            "monster_creater": "モンスター作成",
             "login": "ログイン",
             "logout": "ログアウト",
             "welcome": "ようこそ"

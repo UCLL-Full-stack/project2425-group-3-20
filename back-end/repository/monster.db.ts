@@ -66,32 +66,41 @@ const getMonstersByUser = async (userId: number): Promise<Monster[]> => {
 };
 
 
-const deleteMonsterActions = async (monsterId: number): Promise<Monster> => {
+const deleteMonster = async (monsterId: number): Promise<Monster> => {
     try {
-        // Fetch the monster from the database
-        const monsterPrisma = await database.monster.findUnique({
-            where: { id: monsterId },
-            include: { actions: true },  // Ensure actions are fetched
+        const encounterTablesWithMonster = await database.encounterTable.findMany({
+            where: {
+                monsters: {
+                    some: { id: monsterId }
+                }
+            },
+            select: { id: true }
         });
 
-        if (!monsterPrisma) {
-            throw new Error(`Monster with ID ${monsterId} not found.`);
+        // Disconnect the monster from each encounter table
+        for (const table of encounterTablesWithMonster) {
+            await database.encounterTable.update({
+                where: { id: table.id },
+                data: {
+                    monsters: {
+                        disconnect: { id: monsterId }
+                    }
+                }
+            });
         }
-        const updatedMonsterPrisma = await database.monster.update({
+
+        // Fetch the monster from the database
+        const monsterPrisma = await database.monster.delete({
             where: { id: monsterId },
-            data: {
-                actions: {
-                    set: [], 
-                },
-            },
-            include: { 
-                actions: true,
-                owner:true
-             }, 
+            include: { actions: true,
+                        owner:true
+             },  // Ensure actions are fetched
         });
+
+        
 
         // Return the updated monster
-        return Monster.from(updatedMonsterPrisma);
+        return Monster.from(monsterPrisma);
     } catch (error) {
         throw new Error(`Failed to delete action: ${error}`);
     }
@@ -141,7 +150,7 @@ const createMonster = async ({
         throw new Error('Database error. See server log for details.');
     }
 };
-export default { getAllMonsters,createMonster,deleteMonsterActions,getMonsterById,getMonstersByUser, };
+export default { getAllMonsters,createMonster,deleteMonster,getMonsterById,getMonstersByUser, };
 
 //const actions: Action[] = [
     //     new Action({

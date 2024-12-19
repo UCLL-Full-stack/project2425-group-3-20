@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import classNames from "classnames";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { LoggedInUser, StatusMessage } from "@types";
 import MonsterService from "@services/MonsterService";
 
@@ -86,7 +86,7 @@ const MonsterCreationForm = () => {
 
   return (
     <div>
-      <h3>{t("monster.title")}</h3>
+      <h3>{t("monster.title.create")}</h3>
       {statusMessages && (
         <ul>
           {statusMessages.map(({ message, type }, index) => (

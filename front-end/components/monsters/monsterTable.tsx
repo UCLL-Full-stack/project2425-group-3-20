@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import { LoggedInUser, Monster } from "@types";
 import { useRouter } from "next/router";
 import MonsterService from "@services/MonsterService";
+import { useTranslation } from "next-i18next";
 
 type Props = {
   monsters: Array<Monster>;
 };
-
+ 
 const monsterOverviewTable: React.FC<Props> = ({ monsters }: Props) => {
     const router = useRouter();
+    const { t } = useTranslation();
     const [loggedInUser, setLoggedInUser] = useState<LoggedInUser | null>(null);
     useEffect(() => {
         const loggedInUserString = localStorage.getItem("loggedInUser");
@@ -30,21 +32,21 @@ const monsterOverviewTable: React.FC<Props> = ({ monsters }: Props) => {
         <table className="table table-hover">
           <thead>
             <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Strength</th>
-              <th scope="col">Dexterity</th>
-              <th scope="col">Constitution</th>
-              <th scope="col">Intelligence</th>
-              <th scope="col">Wisdom</th>
-              <th scope="col">Charisma</th>
-              <th scope="col">Actions</th>
-              <th scope="col">Armor Class</th>
-              <th scope="col">Hit Points</th>
-              <th scope="col">Immunities</th>
-              <th scope="col">Languages</th>
-              <th scope="col">Challenge Rating</th>
-              <th scope="col">Type</th>
-              <th scope="col">Movement</th>
+              <th scope="col">{t("monster.label.name")}</th>
+              <th scope="col">{t("monster.label.str")}</th>
+              <th scope="col">{t("monster.label.dex")}</th>
+              <th scope="col">{t("monster.label.con")}</th>
+              <th scope="col">{t("monster.label.int")}</th>
+              <th scope="col">{t("monster.label.wis")}</th>
+              <th scope="col">{t("monster.label.cha")}</th>
+              <th scope="col">{t("monster.label.actions")}</th>
+              <th scope="col">{t("monster.label.ac")}</th>
+              <th scope="col">{t("monster.label.hp")}</th>
+              <th scope="col">{t("monster.label.immunities")}</th>
+              <th scope="col">{t("monster.label.languages")}</th>
+              <th scope="col">{t("monster.label.cr")}</th>
+              <th scope="col">{t("monster.label.type")}</th>
+              <th scope="col">{t("monster.label.movement")}</th>
             </tr>
           </thead>
           <tbody>
@@ -75,7 +77,7 @@ const monsterOverviewTable: React.FC<Props> = ({ monsters }: Props) => {
                     if (monster.id !== undefined) {
                       deleteActions(monster.id);
                     }
-                  })}>Delete Actions</button>
+                  })}>{t("monster.button.delete")}</button>
                 </td>)}
               </tr>
             ))}

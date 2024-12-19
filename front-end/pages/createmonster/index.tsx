@@ -3,12 +3,14 @@ import Header from "@components/header";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import UserLoginForm from "@components/users/userLoginForm";
 import MonsterCreationForm from "@components/monsters/monsterCreationForm";
+import { useTranslation } from "next-i18next";
 
 const Login: React.FC = () => {
+    const { t } = useTranslation();
     return (
         <>
             <Head>
-                <title>Monster creater</title>
+                <title>{t("monster.title.creator")}</title>
             </Head>
             <Header />
             <main>
@@ -19,5 +21,12 @@ const Login: React.FC = () => {
         </>
     );
 };
-
+export const getServerSideProps = async (context:{locale: any}) => {
+    const { locale } = context;
+    return {
+        props: {
+            ...(await serverSideTranslations(locale ?? "en", ["common"])),
+        },
+    };
+};
 export default Login;

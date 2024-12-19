@@ -3,7 +3,7 @@ import { StatusMessage } from "@types";
 import classNames from "classnames";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 
 const UserLoginForm: React.FC = () => {

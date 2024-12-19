@@ -1,17 +1,76 @@
-{   "app":{
-        "title":"Home",
-        "text":"Home"
+{   
+    "login": {
+        "title": "User Login",
+        "label": {
+            "username": "Username",
+            "password": "Password"
+        },
+        "validate": {
+            "name": "Username is required.",
+            "password": "Password is required."
+        },
+        "button": "Login",
+        "success": "Login successful!",
+        "name": "Username",
+        "password": "Password",
+        "role": "role"
+        
+    },
+    "monster": {
+        "monsters":"All Monsters",
+        "overview":"Overview",
+        "deniedtext":"You do not have the required permissions to view this page.",
+        "title":{
+            "Create":"Create a Monster",
+            "get":"All monsters",
+            "name":"All Monsters",
+            "creator":"Monster Creator",
+            "create":"Monster creator",
+            "denied": "Acces denied",
+            "singup":"User Signup"
+        } ,
+        "label": {
+            "name": "Name",
+            "str": "Strength",
+            "dex": "Dexterity",
+            "con": "Constitution",
+            "int": "Intelligence",
+            "wis": "Wisdom",
+            "cha": "Charisma",
+            "ac": "Armor Class",
+            "hp": "Hit Points",
+            "immunities": "Immunities",
+            "languages": "Languages",
+            "cr": "Challenge Rating",
+            "type": "Type",
+            "movement": "Movement Speed",
+            "actions":"Actions"
+        },
+        "button": {
+            "submit": "Submit",
+            "delete":"Delete Monster"
+        },
+        "validate": {
+            "name": "Name is required.",
+            "stats": "All stats must be greater than 0.",
+            "ac": "Armor Class must be greater than 0.",
+            "hp": "Hit Points must be greater than 0."
+        }
+    },
+    "app": {
+        "title": "Home",
+        "text": "Home"
     },
     "header": {
         "nav": {
             "title": "Bob the encounter builder",
             "home": "Home",
             "monster": "Monsters",
-            "my_monster":"My monsters",
-            "monster_creater":"Monster creator",
+            "my_monster": "My monsters",
+            "monster_creater": "Monster creator",
             "login": "Login",
             "logout": "Logout",
-            "welcome":"Welcome"
+            "welcome": "Welcome"
         }
     }
 }

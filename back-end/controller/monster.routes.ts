@@ -178,10 +178,10 @@ monsterRouter.get('/all', async (req: Request, res: Response, next: NextFunction
 /**
  * @swagger
  * /monsters/{monsterId}:
- *   put:
+ *   delete:
  *     security:
  *       - bearerAuth: []
- *     summary: Delete a monster action by monster ID and action ID, then return the associated monster
+ *     summary: Delete a monster  monster ID return the associated monster
  *     parameters:
  *       - in: path
  *         name: monsterId
@@ -191,7 +191,7 @@ monsterRouter.get('/all', async (req: Request, res: Response, next: NextFunction
  *         description: The monster ID
  *     responses:
  *       200:
- *         description: Monster action deleted successfully, returning the associated monster
+ *         description: Monster deleted successfully, returning the associated monster
  *         content:
  *           application/json:
  *             schema:
@@ -199,7 +199,7 @@ monsterRouter.get('/all', async (req: Request, res: Response, next: NextFunction
  *               properties:
  *                 message:
  *                   type: string
- *                   example: "Monster action deleted successfully"
+ *                   example: "Monster deleted successfully"
  *                 monster:
  *                   $ref: '#/components/schemas/Monster'
  *       404:
@@ -213,9 +213,9 @@ monsterRouter.get('/all', async (req: Request, res: Response, next: NextFunction
  *                   type: string
  *                   example: "Monster with ID not found"
  */
-monsterRouter.put('/:monsterId', async (req: Request, res: Response, next: NextFunction) => {
+monsterRouter.delete('/:monsterId', async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const monsters = await monsterService.deleteMonsterActions(Number(req.params.monsterId));
+        const monsters = await monsterService.deleteMonster(Number(req.params.monsterId));
         res.json(monsters);
     } catch (err) {
         next(err);

@@ -20,7 +20,7 @@ const Home: React.FC = () => {
         </>
     );
 }
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps = async (context:{locale: any}) => {
     const { locale } = context;
     return {
         props: {
