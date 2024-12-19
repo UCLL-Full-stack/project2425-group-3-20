@@ -16,7 +16,6 @@ const getEncounterTables = async () => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(getEncounterTables),
   });
 
   if (!response.ok) {
@@ -42,7 +41,6 @@ const getEncounterTableById = async (id: number) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(getEncounterTables),
   });
 
   if (!response.ok) {
@@ -63,12 +61,11 @@ const deleteMonsterFromEncounterTable = async (encounterTableId:number, monsterI
   const token = user.token;
 
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/encounterTables/${encounterTableId}/${monsterId}`, {
-    method: "GET",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(getEncounterTables),
   });
 
   if (!response.ok) {
