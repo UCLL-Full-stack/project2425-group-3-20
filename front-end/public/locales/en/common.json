@@ -71,13 +71,16 @@
             "encounterTable": "Encounter tables",
             "login": "Login",
             "logout": "Logout",
-            "welcome": "Welcome"
+            "welcome": "Welcome",
+            "encounter_table":" Encountertables"
         }
     },
     "encounterTable": {
         "title": "Encountertable",
         "titleOverview": "Encountertable overview",
         "delete": "Delete",
-        "notFound": "No encountertables found"
+        "notFound": "No encountertables found",
+        "monster": "Monsters",
+        "name" : "Name"
     }
 }

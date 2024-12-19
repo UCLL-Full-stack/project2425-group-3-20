@@ -1,5 +1,6 @@
 import EncounterTableService from "@services/EncounterTableService";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 type Props = {
     encounterTableId: number;
@@ -7,6 +8,7 @@ type Props = {
 };
 
 const DeleteMonsterButton: React.FC<Props> = ({ encounterTableId, monsterId }: Props) => {
+    const {t} = useTranslation();
     const router = useRouter();
 
     const deleteMonster = async () => {
@@ -15,7 +17,7 @@ const DeleteMonsterButton: React.FC<Props> = ({ encounterTableId, monsterId }: P
     };
 
     return (
-        <button onClick={deleteMonster}>Delete</button>
+        <button onClick={deleteMonster}>{t("encounterTable.delete")}</button>
     );
 };
 

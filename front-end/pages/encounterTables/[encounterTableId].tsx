@@ -2,12 +2,13 @@ import Header from "@components/header";
 import EncounterTableService from "@services/EncounterTableService";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import useSWR from "swr";
 import { EncounterTable, LoggedInUser } from "@types";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import EncounterTableDetail from "@components/encounterTable/EncounterTables";
 import DeleteMonsterButton from "@components/encounterTable/DeleteMonsterEncounterTableButton";
+import Head from "next/head";
 
 const EncounterTableInfo: React.FC = () => {
     const router = useRouter();
@@ -24,7 +25,7 @@ const EncounterTableInfo: React.FC = () => {
             const parsedId = parseInt(encounterTableId); 
             const response = await EncounterTableService.getEncounterTableById(parsedId);
                 const encounter_table = await response.json();
-                console.log(encounter_table)
+                setIsLoading(false);
                 setEncounterTable(encounter_table);
             } 
     };
@@ -35,11 +36,27 @@ const EncounterTableInfo: React.FC = () => {
         }
     }, []);
     useEffect(() =>{
-        getEncounterTableById()
+        if(!loggedInUser){
+            getEncounterTableById()
+        }
+        
     }
     )
     
-
+    if (!loggedInUser || (loggedInUser.role !== 'admin' && loggedInUser.role !== 'gameMaster')) {
+        return (
+            <>
+                <Head>
+                    <title>{t("monster.title.denied")}</title>
+                </Head>
+                <Header />
+                <main className='d-flex flex-column justify-content-center align-items-center'>
+                    <h1>{t("monster.title.denied")}</h1>
+                    <p>{t("monster.deniedtext")}</p>
+                </main>
+            </>
+        );
+    }
     return (
         <>
             <Header />
@@ -55,8 +72,8 @@ const EncounterTableInfo: React.FC = () => {
                             <p>{encounterTable.owner}</p>
                             <table className="w-1/2 border-collapse mx-auto mt-5 rounded-lg">
                                 <thead>
-                                    <th>Monster</th>
-                                    <th>Delete</th>
+                                    <th>{t("encounterTable.monster")}</th>
+                                    <th>{t("encounterTable.delete")}</th>
                                 </thead>
                                 <tbody>
                                     {encounterTable.monsters.map((monster, index) => (

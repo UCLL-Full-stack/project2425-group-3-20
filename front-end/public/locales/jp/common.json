@@ -33,15 +33,15 @@
             "str": "筋力",
             "dex": "敏捷性",
             "con": "耐久力",
-            "int": "知性",
+            "int": "知力",
             "wis": "判断力",
             "cha": "魅力",
             "ac": "アーマークラス",
             "hp": "ヒットポイント",
             "immunities": "免疫",
             "languages": "言語",
-            "cr": "挑戦度",
-            "type": "種類",
+            "cr": "チャレンジレーティング",
+            "type": "タイプ",
             "movement": "移動速度",
             "actions": "アクション"
         },
@@ -62,14 +62,24 @@
     },
     "header": {
         "nav": {
-            "title": "エンカウンタービルダーのボブ",
+            "title": "遭遇ビルダーのボブ",
             "home": "ホーム",
             "monster": "モンスター",
             "my_monster": "私のモンスター",
-            "monster_creater": "モンスター作成",
+            "monster_creater": "モンスター作成者",
+            "encounterTable": "遭遇表",
             "login": "ログイン",
             "logout": "ログアウト",
-            "welcome": "ようこそ"
+            "welcome": "ようこそ",
+            "encounter_table": "遭遇表"
         }
+    },
+    "encounterTable": {
+        "title": "遭遇表",
+        "titleOverview": "遭遇表概要",
+        "delete": "削除",
+        "notFound": "遭遇表が見つかりません",
+        "monster": "モンスター",
+        "name": "名前"
     }
 }

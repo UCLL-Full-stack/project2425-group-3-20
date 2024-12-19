@@ -23,7 +23,7 @@ const EncounterTableOverviewTable: React.FC<Props> = ({ encounterTable }: Props)
                     <table className="w-1/2 border-collapse mx-auto mt-5 rounded-lg">
                         <thead>
                             <tr>
-                                <th className="bg-gray-200 text-gray-600 border border-gray-300 px-4 py-2">Name</th>
+                                <th className="bg-gray-200 text-gray-600 border border-gray-300 px-4 py-2">{t("encounterTable.name")}</th>
                             </tr>
                         </thead>
                         <tbody>
