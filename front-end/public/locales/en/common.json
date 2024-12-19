@@ -9,9 +9,16 @@
             "monster": "Monsters",
             "my_monster":"My monsters",
             "monster_creater":"Monster creator",
+            "encounterTable": "Encounter tables",
             "login": "Login",
             "logout": "Logout",
             "welcome":"Welcome"
         }
+    },
+    "encounterTable": {
+        "title": "Encountertable",
+        "titleOverview": "Encountertable overview",
+        "delete": "Delete",
+        "notFound": "No encountertables found"
     }
 }

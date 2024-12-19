@@ -38,3 +38,10 @@ export type LoggedInUser  ={
     password: string;
     role:string;
 }
+
+export type EncounterTable = {
+    id?: number;
+    name: string;
+    monsters: Monster[];
+    ownername:string;
+};
