@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import useSWR from "swr";
-import { EncounterTable } from "@types";
+import { EncounterTable, LoggedInUser } from "@types";
 
 const EncounterTableInfo: React.FC = () => {
     const router = useRouter();
@@ -14,21 +14,23 @@ const EncounterTableInfo: React.FC = () => {
     const [encounterTable, setEncounterTable] = useState<EncounterTable | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [loggedInUser, setLoggedInUser] = useState<LoggedInUser | null>(null);
 
     useEffect(() => {
-        if (encounterTableId) {
-            fetch(`/api/encounterTable/${encounterTableId}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    setEncounterTable(data);
-                    setIsLoading(false);
-                })
-                .catch((err) => {
-                    setError(err);
-                    setIsLoading(false);
-                });
+        const loggedInUserString = localStorage.getItem("loggedInUser");
+        if (loggedInUserString !== null) {
+            setLoggedInUser(JSON.parse(loggedInUserString));
         }
-    }, [encounterTableId]);
+    }, []);
+
+    useEffect(() => {
+        if (loggedInUser) {
+            const getEncounterTable = async () => {
+                const response = await EncounterTableService.getEncounterTableById(parseInt(encounterTableId));
+                const encounterTable = await response.json();
+                setEncounterTable(encounterTable);
+            }
+    }, [loggedInUser]);
 
     return (
         <>
@@ -48,6 +50,9 @@ const EncounterTableInfo: React.FC = () => {
                                     <li key={monster.id}>{monster.name}</li>
                                 ))}
                             </ul>
+                            <button>
+                                {t("encounterTable.removeMonster")}
+                            </button>
                         </div>
                     )}
                 </section>

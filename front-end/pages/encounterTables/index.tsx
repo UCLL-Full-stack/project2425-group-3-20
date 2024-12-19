@@ -14,7 +14,8 @@ const EncounterTables: React.FC = () => {
     useEffect(() => {
         const fetchEncounterTables = async () => {
             const response = await EncounterTableService.getEncounterTables();
-            setEncounterTables(response);
+            const encountertables = await response.json();
+            setEncounterTables(encountertables);
         };
         fetchEncounterTables();
     }, []);

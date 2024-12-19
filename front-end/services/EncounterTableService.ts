@@ -1,48 +1,59 @@
 import { EncounterTable } from "@types";
 
 const getEncounterTables = async () => {
-    const response = await fetch(process.env.NEXT_PUBLIC_API_URL+"/encounterTables/all", {
-        method:"GET",
-        headers:{
-            "Content-Type" : "application/json"
-        }
-    });
+    const loggedInUser = localStorage.getItem("loggedInUser");
 
-    // if (!response.ok) {
-    //     throw new Error(`Failed to fetch encounter tables: ${response.statusText}`);
-    // }
+  if (!loggedInUser) {
+    throw new Error("No logged-in user found");
+  }
 
-    return response.json() as Promise<EncounterTable[]>;
+  const user = JSON.parse(loggedInUser);
+  const token = user.token;
+
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/encounterTables/`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(getEncounterTables),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch monsters: ${response.statusText}`);
+  }
+
+  return response;
 };
 
 const getEncounterTableById = async (id: number) => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/encounterTables/${id}`,{
-        method:"GET",
-        headers:{
-            "Content-Type" : "application/json"
-        }
-    });
+    const loggedInUser = localStorage.getItem("loggedInUser");
 
-    // if (!response.ok) {
-    //     throw new Error(`Failed to fetch encounter table: ${response.statusText}`);
-    // }
+  if (!loggedInUser) {
+    throw new Error("No logged-in user found");
+  }
 
-    return response.json() as Promise<EncounterTable>;
+  const user = JSON.parse(loggedInUser);
+  const token = user.token;
+
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/encounterTables/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(getEncounterTables),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch monsters: ${response.statusText}`);
+  }
+
+  return response;
 };
 
 const deleteMonsterFromEncounterTable = async (encounterTableId:number, monsterId:number) =>{
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/encounterTables/${encounterTableId}/monsters/${monsterId}`,{
-        method:"PUT",
-        headers:{
-            "Content-Type" : "application/json"
-        }
-    });
-
-    if (!response.ok) {
-        throw new Error(`Failed to delete monster from encounter table: ${response.statusText}`);
-    }
-
-    return response.json() as Promise<EncounterTable>;
+    
 };
 
 export default { getEncounterTables, getEncounterTableById, deleteMonsterFromEncounterTable };
