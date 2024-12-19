@@ -143,7 +143,7 @@ const main = async () => {
                 connect: { id: frans.id },
             },
             monsters: {
-                connect: [{ id: monster1.id }],
+                connect: [{ id: monster1.id },{id:monster2.id}],
             },
         },
     });
