@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import useSWR from "swr";
 import { EncounterTable, LoggedInUser } from "@types";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const EncounterTableInfo: React.FC = () => {
     const router = useRouter();
@@ -16,21 +17,26 @@ const EncounterTableInfo: React.FC = () => {
     const [error, setError] = useState(null);
     const [loggedInUser, setLoggedInUser] = useState<LoggedInUser | null>(null);
 
+    const getEncounterTableById = async () => {
+        if (typeof encounterTableId === "string") {
+            const parsedId = parseInt(encounterTableId); 
+            const response = await EncounterTableService.getEncounterTableById(parsedId);
+                const encounter_table = await response.json();
+                console.log(encounter_table)
+                setEncounterTable(encounter_table);
+            } 
+    };
     useEffect(() => {
         const loggedInUserString = localStorage.getItem("loggedInUser");
         if (loggedInUserString !== null) {
             setLoggedInUser(JSON.parse(loggedInUserString));
         }
     }, []);
-
-    useEffect(() => {
-        if (loggedInUser) {
-            const getEncounterTable = async () => {
-                const response = await EncounterTableService.getEncounterTableById(parseInt(encounterTableId));
-                const encounterTable = await response.json();
-                setEncounterTable(encounterTable);
-            }
-    }, [loggedInUser]);
+    useEffect(() =>{
+        getEncounterTableById()
+    }
+    )
+    
 
     return (
         <>
@@ -61,5 +67,12 @@ const EncounterTableInfo: React.FC = () => {
         </>
     )
 }
-
+export const getServerSideProps = async (context:{locale: any}) => {
+    const { locale } = context;
+    return {
+        props: {
+            ...(await serverSideTranslations(locale ?? "en", ["common"])),
+        },
+    };
+};
 export default EncounterTableInfo;

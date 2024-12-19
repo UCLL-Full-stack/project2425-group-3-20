@@ -5,6 +5,7 @@ import EncounterTableService from "@services/EncounterTableService";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import Header from "@components/header";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const EncounterTables: React.FC = () => {
     const [encounterTables, setEncounterTables] = useState<EncounterTable[]>([]);
@@ -27,5 +28,12 @@ const EncounterTables: React.FC = () => {
         </>
     )
 };
-
+export const getServerSideProps = async (context:{locale: any}) => {
+    const { locale } = context;
+    return {
+        props: {
+            ...(await serverSideTranslations(locale ?? "en", ["common"])),
+        },
+    };
+};
 export default EncounterTables;
