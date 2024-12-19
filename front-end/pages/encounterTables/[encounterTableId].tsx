@@ -6,6 +6,8 @@ import { useTranslation } from "react-i18next";
 import useSWR from "swr";
 import { EncounterTable, LoggedInUser } from "@types";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import EncounterTableDetail from "@components/encounterTable/EncounterTables";
+import DeleteMonsterButton from "@components/encounterTable/DeleteMonsterEncounterTableButton";
 
 const EncounterTableInfo: React.FC = () => {
     const router = useRouter();
@@ -51,14 +53,24 @@ const EncounterTableInfo: React.FC = () => {
                             <h1>{encounterTable.name}</h1>
                             <p>{encounterTable.description}</p>
                             <p>{encounterTable.owner}</p>
-                            <ul>
-                                {encounterTable.monsters.map((monster) => (
-                                    <li key={monster.id}>{monster.name}</li>
-                                ))}
-                            </ul>
-                            <button>
-                                {t("encounterTable.removeMonster")}
-                            </button>
+                            <table className="w-1/2 border-collapse mx-auto mt-5 rounded-lg">
+                                <thead>
+                                    <th>Monster</th>
+                                    <th>Delete</th>
+                                </thead>
+                                <tbody>
+                                    {encounterTable.monsters.map((monster, index) => (
+                                        <tr key={monster.id}>
+                                            <td>{monster.name}</td>
+                                            <td>
+                                                {encounterTable.id !== undefined && monster.id !== undefined && (
+                                                    <DeleteMonsterButton encounterTableId={encounterTable.id} monsterId={monster.id} />
+                                                )}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
                         </div>
                     )}
                 </section>
@@ -75,4 +87,5 @@ export const getServerSideProps = async (context:{locale: any}) => {
         },
     };
 };
+
 export default EncounterTableInfo;
