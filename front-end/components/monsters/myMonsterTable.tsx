@@ -1,21 +1,31 @@
-import React from "react";
-import { Monster } from "@types";
+import React, { useEffect, useState } from "react";
+import { LoggedInUser, Monster } from "@types";
 import { useRouter } from "next/router";
 import MonsterService from "@services/MonsterService";
+import { useTranslation } from "next-i18next";
 
 type Props = {
   monsters: Array<Monster>;
 };
 
-const my_monsterOverviewTable: React.FC<Props> = ({ monsters }: Props) => {
-    const router = useRouter();
+const monsterOverviewTable: React.FC<Props> = ({ monsters }: Props) => {
+  const router = useRouter();
+  const { t } = useTranslation();
+  const [loggedInUser, setLoggedInUser] = useState<LoggedInUser | null>(null);
 
-    const deleteActions = async (id: number) => {
-        const response = await MonsterService.deleteActions(id);
-        if (response.ok) {
-            router.reload();
-        }
-    };
+  useEffect(() => {
+    const loggedInUserString = localStorage.getItem("loggedInUser");
+    if (loggedInUserString !== null) {
+      setLoggedInUser(JSON.parse(loggedInUserString));
+    }
+  }, []);
+
+  const deleteActions = async (id: number) => {
+    const response = await MonsterService.deleteActions(id);
+    if (response.ok) {
+      router.reload();
+    }
+  };
 
   return (
     <>
@@ -23,22 +33,24 @@ const my_monsterOverviewTable: React.FC<Props> = ({ monsters }: Props) => {
         <table className="table table-hover">
           <thead>
             <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Strength</th>
-              <th scope="col">Dexterity</th>
-              <th scope="col">Constitution</th>
-              <th scope="col">Intelligence</th>
-              <th scope="col">Wisdom</th>
-              <th scope="col">Charisma</th>
-              <th scope="col">Actions</th>
-              <th scope="col">Armor Class</th>
-              <th scope="col">Hit Points</th>
-              <th scope="col">Immunities</th>
-              <th scope="col">Languages</th>
-              <th scope="col">Challenge Rating</th>
-              <th scope="col">Type</th>
-              <th scope="col">Movement</th>
-              <th scope="col">Delete Actions</th>
+              <th scope="col">{t("monster.label.name")}</th>
+              <th scope="col">{t("monster.label.str")}</th>
+              <th scope="col">{t("monster.label.dex")}</th>
+              <th scope="col">{t("monster.label.con")}</th>
+              <th scope="col">{t("monster.label.int")}</th>
+              <th scope="col">{t("monster.label.wis")}</th>
+              <th scope="col">{t("monster.label.cha")}</th>
+              <th scope="col">{t("monster.label.actions")}</th>
+              <th scope="col">{t("monster.label.ac")}</th>
+              <th scope="col">{t("monster.label.hp")}</th>
+              <th scope="col">{t("monster.label.immunities")}</th>
+              <th scope="col">{t("monster.label.languages")}</th>
+              <th scope="col">{t("monster.label.cr")}</th>
+              <th scope="col">{t("monster.label.type")}</th>
+              <th scope="col">{t("monster.label.movement")}</th>
+              {loggedInUser && loggedInUser.role === "admin" && (
+                <th scope="col">{t("monster.label.deleteActions")}</th>
+              )}
             </tr>
           </thead>
           <tbody>
@@ -52,9 +64,10 @@ const my_monsterOverviewTable: React.FC<Props> = ({ monsters }: Props) => {
                 <td>{monster.wis}</td>
                 <td>{monster.cha}</td>
                 <td>
-                  {monster.actions && monster.actions.map((action, index) => (
-                    <div key={index}>{action.name}</div>
-                  ))}
+                  {monster.actions &&
+                    monster.actions.map((action, index) => (
+                      <div key={index}>{action.name}</div>
+                    ))}
                 </td>
                 <td>{monster.ac}</td>
                 <td>{monster.hp}</td>
@@ -63,14 +76,21 @@ const my_monsterOverviewTable: React.FC<Props> = ({ monsters }: Props) => {
                 <td>{monster.cr}</td>
                 <td>{monster.type}</td>
                 <td>{monster.movement}</td>
-                <td>
-                  <button className="px-5 py-2 bg-red-700 text-black border-none rounded cursor-pointer transition-colors duration-300 hover:bg-red-300" onClick={((event) => {
-                    event.stopPropagation();
-                    if (monster.id !== undefined) {
-                      deleteActions(monster.id);
-                    }
-                  })}>Delete Actions</button>
-                </td>
+                {loggedInUser && loggedInUser.role === "admin" && (
+                  <td>
+                    <button
+                      className="px-5 py-2 bg-red-700 text-black border-none rounded cursor-pointer transition-colors duration-300 hover:bg-red-300"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        if (monster.id !== undefined) {
+                          deleteActions(monster.id);
+                        }
+                      }}
+                    >
+                      {t("monster.button.delete")}
+                    </button>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>
@@ -80,4 +100,4 @@ const my_monsterOverviewTable: React.FC<Props> = ({ monsters }: Props) => {
   );
 };
 
-export default my_monsterOverviewTable;
+export default monsterOverviewTable;

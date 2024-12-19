@@ -60,10 +60,19 @@ const getAllMonstersByUser = async () => {
   return response;
 };
 const deleteActions = async (id: number) => {
+  const loggedInUser = localStorage.getItem("loggedInUser");
+
+  if (!loggedInUser) {
+    throw new Error("No logged-in user found");
+  }
+
+  const user = JSON.parse(loggedInUser);
+  const token = user.token;
     return fetch(process.env.NEXT_PUBLIC_API_URL+`/monsters/${id}`,{
-      method:"PUT",
+      method:"DELETE",
       headers:{
-        "Content-Type" : "application/json"
+        "Content-Type" : "application/json",
+        Authorization: `Bearer ${token}`,
       }
   })
 };

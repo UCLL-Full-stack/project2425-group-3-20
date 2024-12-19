@@ -4,6 +4,7 @@ import userDb from '../repository/user.db';
 import { MonsterInput,UserInput } from '../types';
 import userService from './user.service';
 import { User } from '../model/user';
+import de from 'date-fns/esm/locale/de/index.js';
 
 const getAllMonsters = async (): Promise<Monster[]> => {
     return monsterDb.getAllMonsters();
@@ -80,8 +81,8 @@ const getMonstersByUser = async(username:string):Promise<Monster[]|undefined>=>{
     const monsters : Monster[] = await monsterDb.getMonstersByUser(user.getId()!)
     return monsters
 }
-const deleteMonsterActions = async (monsterId:number): Promise<Monster| undefined> => {
-    const monster  = await monsterDb.deleteMonsterActions(monsterId);
+const deleteMonster = async (monsterId:number): Promise<Monster| undefined> => {
+    const monster  = await monsterDb.deleteMonster(monsterId);
     if (!monster) {
         throw new Error(`Monster with id ${monsterId} not found `);
     }
@@ -90,4 +91,4 @@ const deleteMonsterActions = async (monsterId:number): Promise<Monster| undefine
 }
 
 
-export default { getAllMonsters, getMonsterById,deleteMonsterActions,getMonstersByUser,createMonster};
+export default { getAllMonsters, getMonsterById,deleteMonster,getMonstersByUser,createMonster};

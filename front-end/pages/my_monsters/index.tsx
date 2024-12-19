@@ -4,11 +4,13 @@ import MonsterService from '@services/MonsterService';
 import Head from 'next/head';
 import Header from '@components/header';
 import MyMonsterTable from '@components/monsters/myMonsterTable';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 const Monsters: React.FC = () => {
     const [monsters, setMonsters] = useState<Monster[]>([]);
     const [loggedInUser, setLoggedInUser] = useState<LoggedInUser | null>(null);
-
+    const { t } = useTranslation();
     // Fetch the logged-in user from localStorage on initial load
     useEffect(() => {
         const loggedInUserString = localStorage.getItem("loggedInUser");
@@ -34,12 +36,12 @@ const Monsters: React.FC = () => {
         return (
             <>
                 <Head>
-                    <title>Access Denied</title>
+                    <title>{t("monster.title.denied")}</title>
                 </Head>
                 <Header />
                 <main className='d-flex flex-column justify-content-center align-items-center'>
-                    <h1>Access Denied</h1>
-                    <p>You do not have the required permissions to view this page.</p>
+                    <h1>{t("monster.title.denied")}</h1>
+                    <p>{t("monster.deniedtext")}</p>
                 </main>
             </>
         );
@@ -61,5 +63,12 @@ const Monsters: React.FC = () => {
         </>
     );
 };
-
+export const getServerSideProps = async (context:{locale: any}) => {
+    const { locale } = context;
+    return {
+        props: {
+            ...(await serverSideTranslations(locale ?? "en", ["common"])),
+        },
+    };
+};
 export default Monsters;
