@@ -42,6 +42,7 @@ export type LoggedInUser  ={
 export type EncounterTable = {
     id?: number;
     name: string;
+    description: string;
     monsters: Monster[];
-    ownername:string;
+    owner:string;
 };
