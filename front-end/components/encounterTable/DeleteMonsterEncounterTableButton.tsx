@@ -14,6 +14,7 @@ const DeleteMonsterButton: React.FC<Props> = ({ encounterTableId, monsterId }: P
     const deleteMonster = async () => {
         await EncounterTableService.deleteMonsterFromEncounterTable(encounterTableId, monsterId);
         router.push(`/encounterTables/${encounterTableId}`);
+        router.reload();
     };
 
     return (
