@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import React from "react";
 import exp from "constants";
-import Header from "@components/header";
+import Header from "../components/header";
 
 window.React = React;
 jest.mock('next/router', () => require('next-router-mock'));
