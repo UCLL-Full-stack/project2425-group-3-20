@@ -76,7 +76,7 @@ const monsterOverviewTable: React.FC<Props> = ({ monsters }: Props) => {
                 <td>{monster.cr}</td>
                 <td>{monster.type}</td>
                 <td>{monster.movement}</td>
-                {loggedInUser && loggedInUser.role === "admin" && (
+                {loggedInUser && (loggedInUser.role === "admin"|| loggedInUser.role ==="gameMaster" )&& (
                   <td>
                     <button
                       className="px-5 py-2 bg-red-700 text-black border-none rounded cursor-pointer transition-colors duration-300 hover:bg-red-300"
