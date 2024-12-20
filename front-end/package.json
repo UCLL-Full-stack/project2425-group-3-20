@@ -24,6 +24,7 @@
     "use-interval": "^1.4.0"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.26.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.1.0",
     "@types/jest": "^29.5.14",
