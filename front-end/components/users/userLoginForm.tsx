@@ -84,32 +84,33 @@ const UserLoginForm: React.FC = () => {
 
   return (
     <>
-      <table>
+      <table className="w-1/2 border-collapse mx-auto mt-5 rounded-lg">
         <thead>
             <tr>
-                <th>{t("login.name")}</th>
-                <th>{t("login.password")}</th>
-                <th>{t("login.role")}</th>
+                <th className="bg-gray-200 text-gray-600 border border-gray-300 px-4 py-2">{t("login.name")}</th>
+                <th className="bg-gray-200 text-gray-600 border border-gray-300 px-4 py-2">{t("login.password")}</th>
+                <th className="bg-gray-200 text-gray-600 border border-gray-300 px-4 py-2">{t("login.role")}</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>frans </td>
-                <td>frans123</td>
-                <td>gameMaster</td>
+                <td className="border border-gray-300 px-4 py-2">frans </td>
+                <td className="border border-gray-300 px-4 py-2">frans123</td>
+                <td className="border border-gray-300 px-4 py-2">gameMaster</td>
             </tr>
             <tr>
-                <td>jan</td>
-                <td>jan123</td>
-                <td>guest</td>
+                <td className="border border-gray-300 px-4 py-2">jan</td>
+                <td className="border border-gray-300 px-4 py-2">jan123</td>
+                <td className="border border-gray-300 px-4 py-2">guest</td>
             </tr>
             <tr>
-                <td>admin</td>
-                <td>admin123</td>
-                <td>admin</td>
+                <td className="border border-gray-300 px-4 py-2">admin</td>
+                <td className="border border-gray-300 px-4 py-2">admin123</td>
+                <td className="border border-gray-300 px-4 py-2">admin</td>
             </tr>
         </tbody>
     </table>
+    <div className="flex items-center justify-center h-screen">
       <h3 className="px-0">{t("login.title")}</h3> 
       {statusMessages && (
         <div className="row">
@@ -128,7 +129,7 @@ const UserLoginForm: React.FC = () => {
           </ul>
         </div>
       )}
-      <form onSubmit={handleSubmit}>
+      <form className="w-1/2 border-collapse mx-auto my-2 rounded-lg justify-center" onSubmit={handleSubmit}>
         <label htmlFor="nameInput" className="block mb-2 text-sm font-medium">
           {t("login.label.username")} 
         </label>
@@ -163,12 +164,13 @@ const UserLoginForm: React.FC = () => {
           </div>
         </div>
         <button
-          className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+          className="text-black bg-gray-200 hover:bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
           type="submit"
         >
           {t("login.button")} 
         </button>
       </form>
+      </div>
     </>
   );
 };

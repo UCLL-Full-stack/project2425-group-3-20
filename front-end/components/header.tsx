@@ -19,37 +19,37 @@ const Header: React.FC = () => {
         setLoggedInUser(null);
     };
     return (
-        <header className="d-flex justify-content-between align-items-center">
+        <header className="d-flex justify-content-between align-items-center bg-slate-400">
             <h3>{t('header.nav.title')}</h3>
             <nav className="nav justify-content-center">
-                <Link href="/" className="nav-link px-4 fs-5">
+                <Link href="/" className="nav-link px-2 fs-5">
                     {t('header.nav.home')}
                 </Link>
-                <Link href="/monsters" className="nav-link px-4 fs-5">
+                <Link href="/monsters" className="nav-link px-2 fs-5">
                     {t('header.nav.monster')}
                 </Link>
                 {loggedInUser && loggedInUser.role == 'gameMaster' && (
-                    <Link href="/my_monsters" className="nav-link px-4 fs-5">
+                    <Link href="/my_monsters" className="nav-link px-2 fs-5">
                         {t('header.nav.my_monster')}
                     </Link>
                 )}
                 {loggedInUser && loggedInUser.role == 'gameMaster' && (
-                    <Link href="/createmonster" className="nav-link px-4 fs-5">
+                    <Link href="/createmonster" className="nav-link px-2 fs-5">
                         {t('header.nav.monster_creater')}
                     </Link>
                 )}
                 {loggedInUser && loggedInUser.role == 'gameMaster' && (
-                    <Link href="/encounterTables" className="nav-link px-4 fs-5">
+                    <Link href="/encounterTables" className="nav-link px-2 fs-5">
                         {t('header.nav.encounterTable')}
                     </Link>
                 )}
                 {!loggedInUser && (
-                    <Link href="/login" className="nav-link px-4 fs-5">
+                    <Link href="/login" className="nav-link px-2 fs-5">
                         {t('header.nav.login')}
                     </Link>
                 )}
                 {loggedInUser && (
-                    <a href="/login" onClick={handleClick} className="nav-link px-4 fs-5">
+                    <a href="/login" onClick={handleClick} className="nav-link px-2 fs-5">
                         {t('header.nav.logout')}
                     </a>
                 )}
@@ -59,7 +59,9 @@ const Header: React.FC = () => {
                     </div>
                 )}
             </nav>
+            <div className="flex justify-start">
             <Language />
+            </div>
         </header>
     );
 };

@@ -12,7 +12,7 @@ const Login: React.FC = () => {
                 <title>{t("monster.title.singup")}</title>
             </Head>
             <Header />
-            <main>
+            <main className="d-flex flex-column justify-content-center align-items-center justify-center">
                 <section className="p-6 min-h-screen flex flex-col items-center">
                     <UserLoginForm />
                 </section>

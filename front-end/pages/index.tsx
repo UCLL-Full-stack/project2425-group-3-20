@@ -12,9 +12,9 @@ const Home: React.FC = () => {
                 <title>{t('app.title')}</title>
             </Head>
             < Header />
-            <main>
+            <main className="d-flex flex-column justify-content-center align-items-center">
                 <div>
-                    <h4>{t('app.text')}</h4>
+                    <h4 className="">{t('app.text')}</h4>
                 </div>
             </main>
         </>
