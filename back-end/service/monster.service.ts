@@ -84,7 +84,7 @@ const getMonstersByUser = async(username:string):Promise<Monster[]|undefined>=>{
 const deleteMonster = async (monsterId:number): Promise<Monster| undefined> => {
     const monster  = await monsterDb.deleteMonster(monsterId);
     if (!monster) {
-        throw new Error(`Monster with id ${monsterId} not found `);
+        throw new Error(`Monster with id ${monsterId} not found`);
     }
     return monster;
     
