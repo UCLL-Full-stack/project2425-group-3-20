@@ -138,11 +138,11 @@ const MonsterCreationForm = () => {
         </div>
         <div className="flex flex-col items-center">
           <label className="px-4 py-1">{t("monster.label.immunities")}</label>
-          <input className="px-4" value={immunities} onChange={(e) => setImmunities(e.target.value)} placeholder={t("header.example_immunities")} />
+          <input className="px-4" value={immunities} onChange={(e) => setImmunities(e.target.value)} placeholder={t("monster.example_immunities")} />
         </div>
         <div className="flex flex-col items-center">
           <label className="px-4 py-1">{t("monster.label.languages")}</label>
-          <input className="px-4" value={languages} onChange={(e) => setLanguages(e.target.value)} placeholder={t("header.example_languages")} />
+          <input className="px-4" value={languages} onChange={(e) => setLanguages(e.target.value)} placeholder={t("monster.example_languages")} />
         </div>
         <div className="flex flex-col items-center">
           <label className="px-4 py-1">{t("monster.label.cr")}</label>
