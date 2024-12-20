@@ -1,4 +1,4 @@
-import EncounterTableService from "@services/EncounterTableService";
+import EncounterTableService from "../../services/EncounterTableService";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 
