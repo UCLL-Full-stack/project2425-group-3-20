@@ -20,6 +20,15 @@ const EncounterTableInfo: React.FC = () => {
     const [error, setError] = useState(null);
     const [loggedInUser, setLoggedInUser] = useState<LoggedInUser | null>(null);
 
+    const getEncounterTableById = async () => {
+        if (typeof encounterTableId === 'string') {
+            const parsedId = parseInt(encounterTableId);
+            const response = await EncounterTableService.getEncounterTableById(parsedId);
+            const encounter_table = await response.json();
+            setIsLoading(false);
+            setEncounterTable(encounter_table);
+        }
+    };
     useEffect(() => {
         const loggedInUserString = localStorage.getItem('loggedInUser');
         if (loggedInUserString !== null) {
@@ -31,17 +40,6 @@ const EncounterTableInfo: React.FC = () => {
             getEncounterTableById();
         }
     });
-    const getEncounterTableById = async () => {
-        if (loggedInUser){
-        if (typeof encounterTableId === 'string') {
-            const parsedId = parseInt(encounterTableId);
-            const response = await EncounterTableService.getEncounterTableById(parsedId);
-            const encounter_table = await response.json();
-            setIsLoading(false);
-            setEncounterTable(encounter_table);
-        }}
-    };
-    
 
     if (!loggedInUser || (loggedInUser.role !== 'admin' && loggedInUser.role !== 'gameMaster')) {
         return (

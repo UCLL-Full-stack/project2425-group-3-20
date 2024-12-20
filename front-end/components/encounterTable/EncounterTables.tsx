@@ -17,8 +17,8 @@ const EncounterTableDetail: React.FC<Props> = ({ encounterTable }) => {
             <h5 className="text-center mt-5">{encounterTable.owner}</h5>
             <table className="w-1/2 border-collapse mx-auto mt-5 rounded-lg">
                 <thead>
-                    <th>Monster</th>
-                    <th>Delete</th>
+                    <th>{t("encounterTable.monster")}</th>
+                    <th>{t("encounterTable.delete")}</th>
                 </thead>
                 <tbody>
                     {encounterTable.monsters.map((monster, index) => (

@@ -26,6 +26,7 @@ const EncounterTables: React.FC = () => {
             const encountertables = await response.json();
             setEncounterTables(encountertables);
         };
+        fetchEncounterTables();
         }
     }, []);
     if (!loggedInUser || (loggedInUser.role !== 'admin' && loggedInUser.role !== 'gameMaster')) {
