@@ -17,7 +17,7 @@ const DeleteMonsterButton: React.FC<Props> = ({ encounterTableId, monsterId }: P
     };
 
     return (
-        <button onClick={deleteMonster}>{t("encounterTable.delete")}</button>
+        <button onClick={deleteMonster} className="px-2 py-2 bg-gray-200 text-black border-none rounded cursor-pointer transition-colors duration-300 hover:bg-gray-600">{t("encounterTable.delete")}</button>
     );
 };
 
