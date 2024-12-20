@@ -55,7 +55,9 @@
             "stats": "All stats must be greater than 0.",
             "ac": "Armor Class must be greater than 0.",
             "hp": "Hit Points must be greater than 0."
-        }
+        },
+        "example_immunities": "Example: Fire, Poison",
+        "example_languages": "Example: Common, Draconic"
     },
     "app": {
         "title": "Home",

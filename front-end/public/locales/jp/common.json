@@ -72,7 +72,9 @@
             "logout": "ログアウト",
             "welcome": "ようこそ",
             "encounter_table": "遭遇表"
-        }
+        },
+        "example_immunities": "例: 火, 毒",
+        "example_languages": "例: 共通語, 竜語"
     },
     "encounterTable": {
         "title": "遭遇表",
