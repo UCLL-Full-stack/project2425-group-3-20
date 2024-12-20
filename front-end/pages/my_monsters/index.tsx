@@ -40,7 +40,7 @@ const Monsters: React.FC = () => {
                 </Head>
                 <Header />
                 <main className='d-flex flex-column justify-content-center align-items-center'>
-                    <h1>{t("monster.title.denied")}</h1>
+                    <h4>{t("monster.title.denied")}</h4>
                     <p>{t("monster.deniedtext")}</p>
                 </main>
             </>
@@ -54,7 +54,7 @@ const Monsters: React.FC = () => {
             </Head>
             <Header />
             <main className='d-flex flex-column justify-content-center align-items-center'>
-                <h1>My Monsters</h1>
+                <h4>My Monsters</h4>
                 <section>
                     <h2>Monster Overview</h2>
                     {monsters && <MyMonsterTable monsters={monsters} />}

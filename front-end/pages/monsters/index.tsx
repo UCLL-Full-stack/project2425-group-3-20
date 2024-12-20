@@ -27,7 +27,7 @@ const Monsters: React.FC = () => {
             </Head>
             <Header />
             <main className='d-flex flex-column justify-content-center align-items-center'>
-                <h1>{t("monster.monsters")}</h1>
+                <h4>{t("monster.monsters")}</h4>
                 <section>
                     <h2>{t("monster.overview")}</h2>
                     {monsters && (

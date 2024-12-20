@@ -12,9 +12,9 @@ const EncounterTableDetail: React.FC<Props> = ({ encounterTable }) => {
 
     return (
         <>
-            <h1 className="text-center mt-5">{encounterTable.name}</h1>
-            <h2 className="text-center mt-5">{encounterTable.description}</h2>
-            <h2 className="text-center mt-5">{encounterTable.owner}</h2>
+            <h4 className="text-center mt-5">{encounterTable.name}</h4>
+            <h5 className="text-center mt-5">{encounterTable.description}</h5>
+            <h5 className="text-center mt-5">{encounterTable.owner}</h5>
             <table className="w-1/2 border-collapse mx-auto mt-5 rounded-lg">
                 <thead>
                     <th>Monster</th>

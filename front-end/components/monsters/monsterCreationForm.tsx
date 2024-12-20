@@ -85,7 +85,7 @@ const MonsterCreationForm = () => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col justify-center">
       <h3>{t("monster.title.create")}</h3>
       {statusMessages && (
         <ul>
@@ -99,64 +99,64 @@ const MonsterCreationForm = () => {
           ))}
         </ul>
       )}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>{t("monster.label.name")}</label>
-          <input value={name} onChange={(e) => setName(e.target.value)} />
+      <form onSubmit={handleSubmit} className="w-1/2 border-collapse mx-auto my-2 rounded-lg justify-center">
+        <div className="flex flex-col items-center">
+          <label className="px-4 py-2">{t("monster.label.name")}</label>
+          <input className="px-4 " value={name} onChange={(e) => setName(e.target.value)} />
         </div>
-        <div>
-          <label>{t("monster.label.str")}</label>
-          <input type="number" value={str} onChange={(e) => setStr(Number(e.target.value))} />
+        <div className="flex flex-col items-center">
+          <label className="px-4 py-1">{t("monster.label.str")}</label>
+          <input className="px-4" type="number" value={str} onChange={(e) => setStr(Number(e.target.value))} />
         </div>
-        <div>
-          <label>{t("monster.label.dex")}</label>
-          <input type="number" value={dex} onChange={(e) => setDex(Number(e.target.value))} />
+        <div className="flex flex-col items-center">
+          <label className="px-4 py-1">{t("monster.label.dex")}</label>
+          <input className="px-4" type="number" value={dex} onChange={(e) => setDex(Number(e.target.value))} />
         </div>
-        <div>
-          <label>{t("monster.label.con")}</label>
-          <input type="number" value={con} onChange={(e) => setCon(Number(e.target.value))} />
+        <div className="flex flex-col items-center">
+          <label className="px-4 py-1">{t("monster.label.con")}</label>
+          <input className="px-4" type="number" value={con} onChange={(e) => setCon(Number(e.target.value))} />
         </div>
-        <div>
-          <label>{t("monster.label.int")}</label>
-          <input type="number" value={int} onChange={(e) => setInt(Number(e.target.value))} />
+        <div className="flex flex-col items-center">
+          <label className="px-4 py-1">{t("monster.label.int")}</label>
+          <input className="px-4" type="number" value={int} onChange={(e) => setInt(Number(e.target.value))} />
         </div>
-        <div>
-          <label>{t("monster.label.wis")}</label>
-          <input type="number" value={wis} onChange={(e) => setWis(Number(e.target.value))} />
+        <div className="flex flex-col items-center">
+          <label className="px-4 py-1">{t("monster.label.wis")}</label>
+          <input className="px-4" type="number" value={wis} onChange={(e) => setWis(Number(e.target.value))} />
         </div>
-        <div>
-          <label>{t("monster.label.cha")}</label>
-          <input type="number" value={cha} onChange={(e) => setCha(Number(e.target.value))} />
+        <div className="flex flex-col items-center">
+          <label className="px-4 py-1">{t("monster.label.cha")}</label>
+          <input className="px-4" type="number" value={cha} onChange={(e) => setCha(Number(e.target.value))} />
         </div>
-        <div>
-          <label>{t("monster.label.ac")}</label>
-          <input type="number" value={ac} onChange={(e) => setAc(Number(e.target.value))} />
+        <div className="flex flex-col items-center">
+          <label className="px-4 py-1">{t("monster.label.ac")}</label>
+          <input className="px-4" type="number" value={ac} onChange={(e) => setAc(Number(e.target.value))} />
         </div>
-        <div>
-          <label>{t("monster.label.hp")}</label>
-          <input type="number" value={hp} onChange={(e) => setHp(Number(e.target.value))} />
+        <div className="flex flex-col items-center">
+          <label className="px-4 py-1">{t("monster.label.hp")}</label>
+          <input className="px-4" type="number" value={hp} onChange={(e) => setHp(Number(e.target.value))} />
         </div>
-        <div>
-          <label>{t("monster.label.immunities")}</label>
-          <input value={immunities} onChange={(e) => setImmunities(e.target.value)} placeholder="e.g., fire, poison" />
+        <div className="flex flex-col items-center">
+          <label className="px-4 py-1">{t("monster.label.immunities")}</label>
+          <input className="px-4" value={immunities} onChange={(e) => setImmunities(e.target.value)} placeholder="e.g., fire, poison" />
         </div>
-        <div>
-          <label>{t("monster.label.languages")}</label>
-          <input value={languages} onChange={(e) => setLanguages(e.target.value)} placeholder="e.g., Common, Draconic" />
+        <div className="flex flex-col items-center">
+          <label className="px-4 py-1">{t("monster.label.languages")}</label>
+          <input className="px-4" value={languages} onChange={(e) => setLanguages(e.target.value)} placeholder="e.g., Common, Draconic" />
         </div>
-        <div>
-          <label>{t("monster.label.cr")}</label>
-          <input type="string" value={cr} onChange={(e) => setCr(e.target.value)} />
+        <div className="flex flex-col items-center">
+          <label className="px-4 py-1">{t("monster.label.cr")}</label>
+          <input className="px-4" type="string" value={cr} onChange={(e) => setCr(e.target.value)} />
         </div>
-        <div>
-          <label>{t("monster.label.type")}</label>
-          <input value={type} onChange={(e) => setType(e.target.value)} />
+        <div className="flex flex-col items-center">
+          <label className="px-4 py-1">{t("monster.label.type")}</label>
+          <input className="px-4" value={type} onChange={(e) => setType(e.target.value)} />
         </div>
-        <div>
-          <label>{t("monster.label.movement")}</label>
-          <input value={movement} onChange={(e) => setMovement(Number(e.target.value))} />
+        <div className="flex flex-col items-center">
+          <label className="px-4 py-1">{t("monster.label.movement")}</label>
+          <input className="px-4" value={movement} onChange={(e) => setMovement(Number(e.target.value))} />
         </div>
-        <button type="submit">{t("monster.button.submit")}</button>
+        <button className="flex flex-col items-center" type="submit">{t("monster.button.submit")}</button>
       </form>
     </div>
   );

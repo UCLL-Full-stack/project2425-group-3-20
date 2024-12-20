@@ -14,7 +14,7 @@ const Home: React.FC = () => {
             < Header />
             <main>
                 <div>
-                    <h1>{t('app.text')}</h1>
+                    <h4>{t('app.text')}</h4>
                 </div>
             </main>
         </>

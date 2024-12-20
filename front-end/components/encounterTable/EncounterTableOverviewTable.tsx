@@ -42,7 +42,7 @@ const EncounterTableOverviewTable: React.FC<Props> = ({ encounterTable }: Props)
                 </div>
 
             ) : (
-                <h1 className="text-center mt-5">{t("encounterTable.notFound")}</h1>
+                <h4 className="text-center mt-5">{t("encounterTable.notFound")}</h4>
             )}
         </>
     )
